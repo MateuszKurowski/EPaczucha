@@ -26,7 +26,6 @@ namespace EPaczuchaWeb
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<EPaczuchaDbContext>(options => options.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=EPaczuchaDatabase;Trusted_Connection=True;"));
@@ -37,10 +36,15 @@ namespace EPaczuchaWeb
             services.AddControllersWithViews();
 
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ICrudRepository<User>, UserRepository>();
             services.AddScoped<ISendMethodRepository, SendMethodRepository>();
+            services.AddScoped<ICrudRepository<SendMethod>, SendMethodRepository>();
             services.AddScoped<IPackagePriceRepository, PackagePriceRepository>();
+            services.AddScoped<ICrudRepository<PackagePrice>, PackagePriceRepository>();
             services.AddScoped<IPackageTypeRepository, PackageTypeRepository>();
+            services.AddScoped<ICrudRepository<PackageType>, PackageTypeRepository>();
             services.AddScoped<IPackageRepository, PackageRepository>();
+            services.AddScoped<ICrudRepository<Package>, PackageRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

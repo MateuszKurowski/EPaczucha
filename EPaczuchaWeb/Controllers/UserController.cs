@@ -14,84 +14,70 @@ namespace EPaczuchaWeb.Controllers
     {
         private readonly IUserRepository _userRepository;
         private readonly IServiceProvider _serviceProvider;
+        private readonly ICrudRepository<EPaczucha.database.User> _crudRepository;
 
-        public UserController(IServiceProvider serviceProvider, IUserRepository userRepository)
+        public UserController(IServiceProvider serviceProvider, IUserRepository userRepository, ICrudRepository<EPaczucha.database.User> crudRepository)
         {
             _serviceProvider = serviceProvider;
             _userRepository = userRepository;
+            _crudRepository = crudRepository;
         }
-
-        private List<Models.User> _users = new()
-        {
-            new Models.User()
-            {
-                Id = 1,
-                Name = "Mateusz Nosel",
-            },
-            new Models.User()
-            {
-                Id = 2,
-                Name = "Kuba Kurek",
-            },
-            new Models.User()
-            {
-                Id = 3,
-                Name = "Maciek Michał",
-            },
-        };
 
         public IActionResult Index()
         {
-            return View(_users);
+            
+            var database = _userRepository.GetAll();
+            return View(database);
         }
 
-        [HttpGet]
-        public IActionResult Edit(int userId)
-        {
-            var user = _users.FirstOrDefault(x => x.Id == userId);
 
-            return View(user);
-        }
+        //[HttpGet]
+        //public IActionResult Edit(int userId)
+        //{
+        //    var user = _users.FirstOrDefault(x => x.Id == userId);
 
-        public IActionResult Edit(Models.User newUser)
-        {
-            var user = _users.FirstOrDefault(x => x.Id == newUser.Id);
+        //    return View(user);
+        //}
 
-            user.Name = newUser.Name;
+        //public IActionResult Edit(Models.User newUser)
+        //{
+        //    var user = _users.FirstOrDefault(x => x.Id == newUser.Id);
 
-            return View("Index", _users);
-        }
+        //    user.Name = newUser.Name;
 
-        public IActionResult Delete(int userId)
-        {
-            _users.Remove(_users.FirstOrDefault(x => x.Id == userId));
+        //    return View("Index", _users);
+        //}
 
-            return View("Index", _users);
-        }
+        //public IActionResult Delete(int userId)
+        //{
+        //    _users.Remove(_users.FirstOrDefault(x => x.Id == userId));
 
-        public IActionResult Details(int userId)
-        {
-            var user = _users.FirstOrDefault(x => x.Id == userId);
+        //    return View("Index", _users);
+        //}
 
-            return View(user);
-        }
+        //public IActionResult Details(int userId)
+        //{
+        //    var user = _users.FirstOrDefault(x => x.Id == userId);
 
-        public IActionResult Add()
-        {
-            return View();
-        }
+        //    return View(user);
+        //}
 
-        [HttpPost]
-        public IActionResult Add(Models.User user)
-        {
-            var id = _users.Select(x => x.Id).Max() + 1;
-            _users.Add(new Models.User
-            {
-                Id = id,
-                Name = user.Name,
-            });
+        //public IActionResult Add()
+        //{
+        //    return View();
+        //}
 
-            return View("Index", _users);
-        }
+        //[HttpPost]
+        //public IActionResult Add(Models.User user)
+        //{
+        //    var id = _users.Select(x => x.Id).Max() + 1;
+        //    _users.Add(new Models.User
+        //    {
+        //        Id = id,
+        //        Name = user.Name,
+        //    });
+
+        //    return View("Index", _users);
+        //}
     }
 }
