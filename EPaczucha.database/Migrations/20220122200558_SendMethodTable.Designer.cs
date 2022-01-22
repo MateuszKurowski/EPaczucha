@@ -4,14 +4,16 @@ using EPaczucha.database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EPaczucha.database.Migrations
 {
     [DbContext(typeof(EPaczuchaDbContext))]
-    partial class EPaczuchaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220122200558_SendMethodTable")]
+    partial class SendMethodTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

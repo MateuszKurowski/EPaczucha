@@ -4,121 +4,22 @@ using EPaczucha.database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EPaczucha.database.Migrations
 {
     [DbContext(typeof(EPaczuchaDbContext))]
-    partial class EPaczuchaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220122194221_IdentityUsers")]
+    partial class IdentityUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.13")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("EPaczucha.database.Package", b =>
-                {
-                    b.Property<int>("PackageID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("EndDate")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PackagePriceID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PackageTypeID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SendMethodID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("StartDate")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("PackageID");
-
-                    b.HasIndex("PackagePriceID");
-
-                    b.HasIndex("PackageTypeID");
-
-                    b.HasIndex("SendMethodID");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Packages");
-                });
-
-            modelBuilder.Entity("EPaczucha.database.PackagePrice", b =>
-                {
-                    b.Property<int>("PackagePriceID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Gross")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Net")
-                        .HasColumnType("int");
-
-                    b.Property<int>("VAT")
-                        .HasColumnType("int");
-
-                    b.HasKey("PackagePriceID");
-
-                    b.ToTable("PackagePrices");
-                });
-
-            modelBuilder.Entity("EPaczucha.database.PackageType", b =>
-                {
-                    b.Property<int>("PackageTypeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Height")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TypeName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Width")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("PackageTypeId");
-
-                    b.ToTable("PackagesTypes");
-                });
-
-            modelBuilder.Entity("EPaczucha.database.SendMethod", b =>
-                {
-                    b.Property<int>("SendMethodId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("MethodName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
-
-                    b.HasKey("SendMethodId");
-
-                    b.ToTable("SendMethods");
-                });
 
             modelBuilder.Entity("EPaczucha.database.User", b =>
                 {
@@ -339,39 +240,6 @@ namespace EPaczucha.database.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("EPaczucha.database.Package", b =>
-                {
-                    b.HasOne("EPaczucha.database.PackagePrice", "PackagePrice")
-                        .WithMany()
-                        .HasForeignKey("PackagePriceID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EPaczucha.database.PackageType", "PackageType")
-                        .WithMany()
-                        .HasForeignKey("PackageTypeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EPaczucha.database.SendMethod", "SendMethod")
-                        .WithMany()
-                        .HasForeignKey("SendMethodID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EPaczucha.database.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("PackagePrice");
-
-                    b.Navigation("PackageType");
-
-                    b.Navigation("SendMethod");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -4,14 +4,16 @@ using EPaczucha.database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EPaczucha.database.Migrations
 {
     [DbContext(typeof(EPaczuchaDbContext))]
-    partial class EPaczuchaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220122200450_PackagesTable")]
+    partial class PackagesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -99,7 +101,7 @@ namespace EPaczucha.database.Migrations
 
                     b.HasKey("PackageTypeId");
 
-                    b.ToTable("PackagesTypes");
+                    b.ToTable("PackageType");
                 });
 
             modelBuilder.Entity("EPaczucha.database.SendMethod", b =>
@@ -117,7 +119,7 @@ namespace EPaczucha.database.Migrations
 
                     b.HasKey("SendMethodId");
 
-                    b.ToTable("SendMethods");
+                    b.ToTable("SendMethod");
                 });
 
             modelBuilder.Entity("EPaczucha.database.User", b =>
