@@ -7,21 +7,21 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EPaczucha.Controllers
 {
-    public class UsersController : Controller
+    public class UserController : Controller
     {
-        private List<Users> _users = new()
+        private List<User> _users = new()
         {
-            new Users()
+            new User()
             {
                 Id= 1,
                 Name = "Mateusz Nosel",
             },
-            new Users()
+            new User()
             {
                 Id = 2,
                 Name = "Kuba Kurek",
             },
-            new Users()
+            new User()
             {
                 Id = 3,
                 Name = "Maciek Michał",
@@ -41,7 +41,7 @@ namespace EPaczucha.Controllers
             return View(user);
         }
 
-        public IActionResult Edit(Users newUser)
+        public IActionResult Edit(User newUser)
         {
             var user = _users.FirstOrDefault(x => x.Id == newUser.Id);
 
@@ -70,10 +70,10 @@ namespace EPaczucha.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(Users user)
+        public IActionResult Add(User user)
         {
             var id = _users.Select(x => x.Id).Max() + 1;
-            _users.Add(new Users
+            _users.Add(new User
             {
                 Id = id,
                 Name = user.Name,

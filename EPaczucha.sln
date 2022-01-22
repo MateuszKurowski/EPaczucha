@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EPaczucha", "EPaczucha\EPaczucha.csproj", "{23424C70-F30C-4027-8AC1-18B3AE93E794}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EPaczuchaTest", "EPaczucha\EPaczuchaTest.csproj", "{23424C70-F30C-4027-8AC1-18B3AE93E794}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPaczucha.database", "EPaczucha.database\EPaczucha.database.csproj", "{12EFE72E-AE72-48B5-B931-F7E7F70FE434}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EPaczucha.database", "EPaczucha.database\EPaczucha.database.csproj", "{12EFE72E-AE72-48B5-B931-F7E7F70FE434}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

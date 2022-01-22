@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EPaczucha.Models;
+
+using Microsoft.AspNetCore.Mvc;
 
 namespace EPaczucha.Controllers
 {
@@ -6,7 +8,7 @@ namespace EPaczucha.Controllers
     {
         public IActionResult Index()
         {
-            return RedirectToAction("Index", "User");
+            return RedirectToAction(nameof(UserController.Index), nameof(User));
         }
     }
 }
