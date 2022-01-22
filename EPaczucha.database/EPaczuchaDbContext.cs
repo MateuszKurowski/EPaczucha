@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace EPaczucha.database
 {
-    public class EPaczuchaDbContext : DbContext
+    public class EPaczuchaDbContext : IdentityDbContext
     {
         //public DbSet<User> Users { get; set; }
 

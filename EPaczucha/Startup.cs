@@ -29,7 +29,7 @@ namespace EPaczucha
         {
             services.AddControllersWithViews();
 
-            services.AddDbContext<EPaczuchaDbContext>(options => options.UseSqlServer("Server=.;Database=EPaczuchaDatabase;Trusted_Connection=True;"));
+            services.AddDbContext<EPaczuchaDbContext>(options => options.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=EPaczuchaDatabase;Trusted_Connection=True;"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
