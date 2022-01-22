@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using EPaczucha.database;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,10 +28,12 @@ namespace EPaczucha
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContext<EPaczuchaDbContext>(options => options.UseSqlServer("Server=.;Database=EPaczuchaDatabase;Trusted_Connection=True;"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -53,6 +58,10 @@ namespace EPaczucha
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            var database = serviceProvider.GetService<EPaczuchaDbContext>();
+
+            database.Database.Migrate();
         }
     }
 }
