@@ -12,6 +12,7 @@ namespace EPaczucha.core
         private readonly IPackageTypeRepository _packageTypeRepository;
         private readonly IPackagePriceRepository _packagePriceRepository;
         private readonly ISendMethodRepository _sendMethodRepository;
+        private readonly IDestinationRepository _destinationRepository;
         private readonly MapperDto _mappersDto;
 
         public ManagerDto(ICustomerRepository customerRepository,
@@ -19,6 +20,7 @@ namespace EPaczucha.core
                           IPackageTypeRepository packageTypeRepository,
                           IPackagePriceRepository packagePriceRepository,
                           ISendMethodRepository sendMethodRepository,
+                          IDestinationRepository destinationRepository,
                           MapperDto mappersDto)
         {
             _customerRepository = customerRepository;
@@ -27,6 +29,7 @@ namespace EPaczucha.core
             _packagePriceRepository = packagePriceRepository;
             _sendMethodRepository = sendMethodRepository;
             _mappersDto = mappersDto;
+            _destinationRepository = destinationRepository;
         }
 
         public List<CustomerDto> GetCustomers(string filterString)
@@ -108,5 +111,31 @@ namespace EPaczucha.core
             var customerEntity = _mappersDto.Map(customer);
             _customerRepository.Update(customerEntity);
         }
+
+        public void AddNewDestination(DestinationDto destination)
+        {
+            var entity = _mappersDto.Map(destination);
+
+            _destinationRepository.Create(entity);
+        }
+
+        public bool DeleteDestination(DestinationDto destination)
+        {
+            var entity = _mappersDto.Map(destination);
+            return _destinationRepository.Delete(entity);
+        }
+
+        public PackageTypeDto GetPackageTypeById(int packageTypeById)
+        {
+            var entity = _packageTypeRepository.GetById(packageTypeById);
+            return _mappersDto.Map(entity);
+        }
+
+        public SendMethodDto GetSendMethodById(int sendMethodById)
+        {
+            var entity = _sendMethodRepository.GetById(sendMethodById);
+            return _mappersDto.Map(entity);
+        }
+
     }
 }

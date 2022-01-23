@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace EPaczuchaWeb.Models
 {
@@ -6,11 +8,14 @@ namespace EPaczuchaWeb.Models
     {
         public int Id { get; set; }
         [DisplayName("Nazwa")]
+        [MaxLength(30, ErrorMessage = "Proszę podać krótsza nazwę paczki!")]
         public string SimpleName { get; set; }
         [DisplayName("Data nadania")]
-        public string StartDate { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime StartDate { get; set; }
         [DisplayName("Przewidywana data dostarczenia")]
-        public string EndDate { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime EndDate { get; set; }
         public CustomerViewModel Customer { get; set; }
         public PackagePriceViewModel PackagePrice { get; set; }
         public PackageTypeViewModel PackageType { get; set; }

@@ -53,14 +53,14 @@ namespace EPaczuchaWeb.Controllers
 
         public IActionResult Details(int id)
         {
-            var dto =_managerDto.GetCustomers(null).Where(x => x.Id == id).FirstOrDefault();
+            var dto =_managerDto.GetCustomers(null).FirstOrDefault(x => x.Id == id);
 
             return View(_mapperViewModel.Map(dto));
         }
 
         public IActionResult Edit(int id)
         {
-            var dto = _managerDto.GetCustomers(null).Where(x => x.Id == id).FirstOrDefault();
+            var dto = _managerDto.GetCustomers(null).FirstOrDefault(x => x.Id == id);
 
             return View("Edit", _mapperViewModel.Map(dto));
         }

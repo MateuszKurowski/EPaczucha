@@ -17,6 +17,7 @@ namespace EPaczuchaWeb.Controllers
         private readonly IPackagePriceRepository _packagePriceRepository;
         private readonly IPackageTypeRepository _packageTypeRepository;
         private readonly ISendMethodRepository _sendMethodRepository;
+        private readonly IDestinationRepository _destinationRepository;
 
         private readonly IServiceProvider _serviceProvider;
         private readonly MapperViewModel _mapperViewModel;
@@ -25,30 +26,33 @@ namespace EPaczuchaWeb.Controllers
         private int _packageId;
         private int _customerId;
 
-        public PackageController(ICustomerRepository customerRepository, 
-                                 IPackageRepository packageRepository, 
-                                 IPackagePriceRepository packagePriceRepository, 
-                                 IPackageTypeRepository packageTypeRepository, 
-                                 ISendMethodRepository sendMethodRepository, 
-                                 IServiceProvider serviceProvider, 
-                                 MapperViewModel mapperViewModel)
+        public PackageController(ICustomerRepository customerRepository,
+                                 IPackageRepository packageRepository,
+                                 IPackagePriceRepository packagePriceRepository,
+                                 IPackageTypeRepository packageTypeRepository,
+                                 ISendMethodRepository sendMethodRepository,
+                                 IDestinationRepository destinationRepository,
+                                 IServiceProvider serviceProvider,
+                                 MapperViewModel mapperViewModel,
+                                 IManagerDto managerDto)
         {
             _serviceProvider = serviceProvider;
             _mapperViewModel = mapperViewModel;
-
+            _managerDto = managerDto;
             _customerRepository = customerRepository;
             _packageRepository = packageRepository;
             _packagePriceRepository = packagePriceRepository;
             _packageTypeRepository = packageTypeRepository;
             _sendMethodRepository = sendMethodRepository;
+            _destinationRepository = destinationRepository;
         }
 
         [HttpGet]
-        public IActionResult Index(int customerId, string filetString = null)
+        public IActionResult Index(int id, string filetString = null)
         {
-            _customerId = customerId;
+            _customerId = id;
 
-            var dtos = _managerDto.GetPackagesByCustomer(customerId, filetString);
+            var dtos = _managerDto.GetPackagesByCustomer(id, filetString);
             var viewModels = _mapperViewModel.Map(dtos);
 
             return View(viewModels);
@@ -57,24 +61,24 @@ namespace EPaczuchaWeb.Controllers
         public IActionResult Add() => View();
 
         [HttpPost]
-        public IActionResult Add(PackageViewModel packageVM, int packageTypeId, int sendMethodId)
+        public IActionResult Add(PackageViewModel packageVM)
         {
             var packageDto = _mapperViewModel.Map(packageVM);
 
             var typePrice = _managerDto.GetPriceFromPackageType(packageDto.PackageType.Id);
             var methodPrice = _managerDto.GetPriceFromSendMethod(packageDto.SendMethod.Id);
             var net = typePrice + methodPrice;
-            var packagePrice = new PackagePriceDto
-            {
-                VAT = 23,
-                Net = net,
-                Gross = net * 23
-            };
-            var packagePriceId = _managerDto.AddNewPackagePrice(packagePrice);
-            if (packagePriceId == 0)
-                packagePriceId = 5;
+            //var packagePrice = new PackagePriceDto
+            //{
+            //    VAT = 23,
+            //    Net = net,
+            //    Gross = net * 23
+            //};
+            //var packagePriceId = _managerDto.AddNewPackagePrice(packagePrice);
+            //if (packagePriceId == 0)
+            //    packagePriceId = 5;
 
-            _managerDto.AddNewPackages(packageDto, _customerId, sendMethodId, (int)packagePriceId, packageTypeId);
+            _managerDto.AddNewPackages(packageDto, _customerId, packageVM.SendMethod.Id, 1, packageVM.PackageType.Id);
 
             return RedirectToAction("Index");
         }

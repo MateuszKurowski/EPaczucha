@@ -15,5 +15,9 @@ namespace EPaczucha.core
         decimal GetPriceFromPackageType(int typeId);
         decimal GetPriceFromSendMethod(int sendMethodId);
         void EditCustomer(CustomerDto customer);
+        public void AddNewDestination(DestinationDto destination);
+        public bool DeleteDestination(DestinationDto destination);
+        PackageTypeDto GetPackageTypeById(int packageTypeById);
+        SendMethodDto GetSendMethodById(int sendMethodById);
     }
 }

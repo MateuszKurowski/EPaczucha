@@ -21,7 +21,7 @@ namespace EPaczucha.database
 
         public bool Create(Entity entity)
         {
-            DbSet.Add(entity);
+            DbSet.ToList().Add(entity);
             return SaveChanges();
         }
         public Entity GetById(int id) => DbSet.FirstOrDefault(x => x.Id == id);

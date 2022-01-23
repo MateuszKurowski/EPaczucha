@@ -26,6 +26,8 @@ namespace EPaczuchaWeb
                       .ReverseMap();
                 config.CreateMap<SendMethodViewModel, SendMethodDto>()
                       .ReverseMap();
+                config.CreateMap<DestinationViewModel, DestinationDto>()
+                      .ReverseMap();
             }).CreateMapper();
         }
 
@@ -40,43 +42,54 @@ namespace EPaczuchaWeb
         #endregion
 
         #region Package
-        public PackageDto Map(PackageViewModel Package) => _mapper.Map<PackageDto>(Package);
-        public List<PackageDto> Map(List<PackageViewModel> Packages)
-            => _mapper.Map<List<PackageDto>>(Packages);
+        public PackageDto Map(PackageViewModel packages) => _mapper.Map<PackageDto>(packages);
+        public List<PackageDto> Map(List<PackageViewModel> packages)
+            => _mapper.Map<List<PackageDto>>(packages);
 
-        public PackageViewModel Map(PackageDto Package) => _mapper.Map<PackageViewModel>(Package);
-        public List<PackageViewModel> Map(List<PackageDto> Packages)
-            => _mapper.Map<List<PackageViewModel>>(Packages);
+        public PackageViewModel Map(PackageDto packages) => _mapper.Map<PackageViewModel>(packages);
+        public List<PackageViewModel> Map(List<PackageDto> packages)
+            => _mapper.Map<List<PackageViewModel>>(packages);
         #endregion
 
         #region PackageType
-        public PackageTypeDto Map(PackageTypeViewModel PackageType) => _mapper.Map<PackageTypeDto>(PackageType);
-        public List<PackageTypeDto> Map(List<PackageTypeViewModel> PackageTypes)
-            => _mapper.Map<List<PackageTypeDto>>(PackageTypes);
+        public PackageTypeDto Map(PackageTypeViewModel packageTypes) => _mapper.Map<PackageTypeDto>(packageTypes);
+        public List<PackageTypeDto> Map(List<PackageTypeViewModel> packageTypes)
+            => _mapper.Map<List<PackageTypeDto>>(packageTypes);
 
-        public PackageTypeViewModel Map(PackageTypeDto PackageType) => _mapper.Map<PackageTypeViewModel>(PackageType);
-        public List<PackageTypeViewModel> Map(List<PackageTypeDto> PackageTypes)
-            => _mapper.Map<List<PackageTypeViewModel>>(PackageTypes);
+        public PackageTypeViewModel Map(PackageTypeDto packageTypes) => _mapper.Map<PackageTypeViewModel>(packageTypes);
+        public List<PackageTypeViewModel> Map(List<PackageTypeDto> packageTypes)
+            => _mapper.Map<List<PackageTypeViewModel>>(packageTypes);
         #endregion
 
         #region PackagePrice
-        public PackagePriceDto Map(PackagePriceViewModel PackagePrice) => _mapper.Map<PackagePriceDto>(PackagePrice);
-        public List<PackagePriceDto> Map(List<PackagePriceViewModel> PackagePrices)
-            => _mapper.Map<List<PackagePriceDto>>(PackagePrices);
+        public PackagePriceDto Map(PackagePriceViewModel packagePrices) => _mapper.Map<PackagePriceDto>(packagePrices);
+        public List<PackagePriceDto> Map(List<PackagePriceViewModel> packagePrices)
+            => _mapper.Map<List<PackagePriceDto>>(packagePrices);
 
-        public PackagePriceViewModel Map(PackagePriceDto PackagePrice) => _mapper.Map<PackagePriceViewModel>(PackagePrice);
-        public List<PackagePriceViewModel> Map(List<PackagePriceDto> PackagePrices)
-            => _mapper.Map<List<PackagePriceViewModel>>(PackagePrices);
+        public PackagePriceViewModel Map(PackagePriceDto packagePrices) => _mapper.Map<PackagePriceViewModel>(packagePrices);
+        public List<PackagePriceViewModel> Map(List<PackagePriceDto> packagePrices)
+            => _mapper.Map<List<PackagePriceViewModel>>(packagePrices);
         #endregion
 
         #region SendMethod
-        public SendMethodDto Map(SendMethodViewModel SendMethod) => _mapper.Map<SendMethodDto>(SendMethod);
-        public List<SendMethodDto> Map(List<SendMethodViewModel> SendMethods)
-            => _mapper.Map<List<SendMethodDto>>(SendMethods);
+        public SendMethodDto Map(SendMethodViewModel sendMethods) => _mapper.Map<SendMethodDto>(sendMethods);
+        public List<SendMethodDto> Map(List<SendMethodViewModel> sendMethods)
+            => _mapper.Map<List<SendMethodDto>>(sendMethods);
 
-        public SendMethodViewModel Map(SendMethodDto SendMethod) => _mapper.Map<SendMethodViewModel>(SendMethod);
-        public List<SendMethodViewModel> Map(List<SendMethodDto> SendMethods)
-            => _mapper.Map<List<SendMethodViewModel>>(SendMethods);
+        public SendMethodViewModel Map(SendMethodDto sendMethods) => _mapper.Map<SendMethodViewModel>(sendMethods);
+        public List<SendMethodViewModel> Map(List<SendMethodDto> sendMethods)
+            => _mapper.Map<List<SendMethodViewModel>>(sendMethods);
         #endregion
+
+        #region Destination
+        public DestinationDto Map(DestinationViewModel destination) => _mapper.Map<DestinationDto>(destination);
+        public List<DestinationDto> Map(List<DestinationViewModel> destination)
+            => _mapper.Map<List<DestinationDto>>(destination);
+
+        public DestinationViewModel Map(DestinationDto destination) => _mapper.Map<DestinationViewModel>(destination);
+        public List<DestinationViewModel> Map(List<DestinationDto> destination)
+            => _mapper.Map<List<DestinationViewModel>>(destination);
+        #endregion
+
     }
 }

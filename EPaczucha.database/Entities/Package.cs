@@ -1,13 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EPaczucha.database
 {
     public class Package : BaseEntity
     {
         public string SimpleName { get; set; }
-        public string StartDate { get; set; }
-        public string EndDate { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
         [ForeignKey("Customer")]
         public int UserId { get; set; }
         public virtual Customer Customer { get; set; }
@@ -20,5 +20,8 @@ namespace EPaczucha.database
         [ForeignKey("SendMethod")]
         public int SendMethodID { get; set; }
         public virtual SendMethod SendMethod { get; set; }
+        [ForeignKey("Destination")]
+        public int DestinationId { get; set; }
+        public virtual Test Destination { get; set; }
     }
 }

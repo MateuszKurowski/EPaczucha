@@ -5,12 +5,9 @@ namespace EPaczucha.database
 {
     public class EPaczuchaDbContext : IdentityDbContext
     {
-        public DbSet<Package> Packages { get; set; }
+        public DbSet<Test> Tests { get; set; }
         public DbSet<PackagePrice> PackagePrices { get; set; }
-        public DbSet<PackageType> PackagesTypes { get; set; }
-        public DbSet<SendMethod> SendMethods { get; set; }
-        public DbSet<Customer> Customers { get; set; }
-
+        public DbSet<Pies> Piess { get; set; }
         public EPaczuchaDbContext(DbContextOptions options) : base(options) { }
     }
 }
