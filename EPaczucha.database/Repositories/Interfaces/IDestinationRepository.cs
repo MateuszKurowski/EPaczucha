@@ -4,6 +4,6 @@ namespace EPaczucha.database
 {
     public interface IDestinationRepository : ICrudRepository<Destination>, IRepostiory<Destination>
     {
-        public IEnumerable<Destination> GetCustomers();
+        public IEnumerable<Destination> GetDestinations();
     }
 }

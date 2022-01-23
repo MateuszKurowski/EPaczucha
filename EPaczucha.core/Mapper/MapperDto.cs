@@ -24,7 +24,7 @@ namespace EPaczucha.core
                       .ReverseMap();
                 config.CreateMap<SendMethod, SendMethodDto>()
                       .ReverseMap();
-                config.CreateMap<DestinationDto, DestinationDto>()
+                config.CreateMap<Destination, DestinationDto>()
                       .ReverseMap();
             }).CreateMapper();
         }
