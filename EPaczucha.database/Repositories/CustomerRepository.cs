@@ -10,11 +10,11 @@ namespace EPaczucha.database
         public CustomerRepository(EPaczuchaDbContext dbContext) : base(dbContext) { }
         protected override DbSet<Customer> DbSet => _dbContext.Customers;
 
-        public IEnumerable<Customer> GetCustomers() => DbSet
+        public IEnumerable<Customer> GetCustomers() => DbSet/*
             .Include(x => x.Packages).ThenInclude(x => x.SendMethod)
             .Include(x => x.Packages).ThenInclude(x => x.PackageType)
             .Include(x => x.Packages).ThenInclude(x => x.PackagePrice)
-            .Select(x => x);
+            */.Select(x => x);
 
         public void Update(Customer customer)
         {

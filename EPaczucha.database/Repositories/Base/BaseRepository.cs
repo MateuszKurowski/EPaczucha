@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EPaczucha.database
 {
-    public abstract class BaseRepository<Entity> where Entity : BaseEntity
+    public abstract class BaseRepository<Entity> : IRepostiory<Entity> where Entity : BaseEntity
     {
         protected EPaczuchaDbContext _dbContext;
 

@@ -1,11 +1,16 @@
-﻿namespace EPaczuchaWeb.Models
+﻿using System.ComponentModel;
+
+namespace EPaczuchaWeb.Models
 {
     public class PackagePriceViewModel
 
     {
         public int Id { get; set; }
-        public int Net { get; set; }
+        [DisplayName("Netto")]
+        public decimal Net { get; set; }
+        [DisplayName("Podatek VAT")]
         public int VAT { get; set; }
-        public int Gross { get; set; }
+        [DisplayName("Brutto")]
+        public decimal Gross { get; set; }
     }
 }

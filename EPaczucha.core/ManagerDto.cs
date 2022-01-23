@@ -41,6 +41,10 @@ namespace EPaczucha.core
             return _mappersDto.Map(customerEntities);
         }
 
+        public decimal GetPriceFromPackageType(int typeId) => _packageTypeRepository.GetById(typeId).Price;
+
+        public decimal GetPriceFromSendMethod(int sendMethodId) => _sendMethodRepository.GetById(sendMethodId).Price;
+
         public IEnumerable<PackageDto> GetPackagesByCustomer(int customerId, string filterString)
         {
             var packageEntities = _packageRepository.GetPackage().Where(x => x.Id == customerId);
@@ -82,6 +86,27 @@ namespace EPaczucha.core
         {
             var entity = _mappersDto.Map(package);
             return _packageRepository.Delete(entity);
+        }
+
+        public PackageDto GetPackageById(int packageId)
+        {
+            var entity = _packageRepository.GetById(packageId);
+            return _mappersDto.Map(entity);
+        }
+
+        public int? AddNewPackagePrice(PackagePriceDto packagePrice)
+        {
+            var entity = _mappersDto.Map(packagePrice);
+
+            _packagePriceRepository.Create(entity);
+
+            return _packagePriceRepository.GetAll().Where(x => x.Gross == entity.Gross && x.Net == entity.Net)?.FirstOrDefault()?.Id;
+        }
+
+        public void EditCustomer(int customerId)
+        {
+            var customer = _customerRepository.GetById(customerId);
+            _customerRepository.Update(customer);
         }
     }
 }

@@ -10,5 +10,10 @@ namespace EPaczucha.core
         bool DeletePackage(PackageDto package);
         IEnumerable<CustomerDto> GetCustomers(string filterString);
         IEnumerable<PackageDto> GetPackagesByCustomer(int customerId, string filterString);
+        int? AddNewPackagePrice(PackagePriceDto packagePrice);
+        PackageDto GetPackageById(int packageId);
+        decimal GetPriceFromPackageType(int typeId);
+        decimal GetPriceFromSendMethod(int sendMethodId);
+        void EditCustomer(int customerId);
     }
 }

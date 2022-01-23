@@ -10,7 +10,7 @@ namespace EPaczucha.database
         public PackageRepository(EPaczuchaDbContext dbContext) : base(dbContext) { }
         protected override DbSet<Package> DbSet => _dbContext.Packages;
 
-        public IEnumerable<Package> GetPackage() => DbSet.Include(x => x.SendMethod).Include(x => x.PackageType).Include(x => x.PackagePrice).Select(x => x);
+        public IEnumerable<Package> GetPackage() => DbSet./*Include(x => x.SendMethod).Include(x => x.PackageType).Include(x => x.PackagePrice).*/Select(x => x);
         public void Update(Package package)
         {
             var foundPackage = DbSet.Where(x => x.Id == package.Id).FirstOrDefault();

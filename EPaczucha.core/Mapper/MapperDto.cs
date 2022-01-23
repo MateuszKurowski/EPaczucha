@@ -29,7 +29,7 @@ namespace EPaczucha.core
 
         #region Customer
         public CustomerDto Map(Customer customer) => _mapper.Map<CustomerDto>(customer);
-        public IEnumerable<CustomerDto> Map(IEnumerable<Customer> customers) 
+        public IEnumerable<CustomerDto> Map(IEnumerable<Customer> customers)
             => _mapper.Map<IEnumerable<CustomerDto>>(customers);
 
         public Customer Map(CustomerDto customer) => _mapper.Map<Customer>(customer);
