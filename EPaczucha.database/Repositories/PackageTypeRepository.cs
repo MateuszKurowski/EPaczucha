@@ -1,20 +1,19 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 using Microsoft.EntityFrameworkCore;
 
 namespace EPaczucha.database
 {
-    public class PackageTypeRepository : BaseRepository<PackageType>, ICrudRepository<PackageType>, IPackageTypeRepository
+    public class PackageTypeRepository : BaseRepository<PackageType>, IPackageTypeRepository
     {
         public PackageTypeRepository(EPaczuchaDbContext dbContext) : base(dbContext) { }
         protected override DbSet<PackageType> DbSet => _dbContext.PackagesTypes;
 
-        public void Create(PackageType packageType) => DbSet.Add(packageType);
-        public void Delete(PackageType packageType) => DbSet.Remove(DbSet.Where(x => x.PackageTypeId == packageType.PackageTypeId).FirstOrDefault());
-        public PackageType GetById(string id) => DbSet.FirstOrDefault(x => x.PackageTypeId.ToString() == id);
+        public IEnumerable<PackageType> GetPackageType() => DbSet.Select(x => x);
         public void Update(PackageType packageType)
         {
-            var foundPackageType = DbSet.Where(x => x.PackageTypeId == packageType.PackageTypeId).FirstOrDefault();
+            var foundPackageType = DbSet.Where(x => x.Id == packageType.Id).FirstOrDefault();
             if (foundPackageType == null)
             {
                 Create(packageType);

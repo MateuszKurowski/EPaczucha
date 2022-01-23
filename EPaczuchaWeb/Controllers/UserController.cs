@@ -12,72 +12,66 @@ namespace EPaczuchaWeb.Controllers
 {
     public class UserController : Controller
     {
-        private readonly IUserRepository _userRepository;
+        private readonly ICustomerRepository _userRepository;
         private readonly IServiceProvider _serviceProvider;
-        private readonly ICrudRepository<EPaczucha.database.User> _crudRepository;
+        private readonly UserMapper _userMapper;
 
-        public UserController(IServiceProvider serviceProvider, IUserRepository userRepository, ICrudRepository<EPaczucha.database.User> crudRepository)
+        public UserController(IServiceProvider serviceProvider, ICustomerRepository userRepository, UserMapper userMapper)
         {
             _serviceProvider = serviceProvider;
             _userRepository = userRepository;
-            _crudRepository = crudRepository;
+            _userMapper = userMapper;
         }
 
         public IActionResult Index()
         {
-            
-            var database = _userRepository.GetAll();
-            return View(database);
+            return View(_userRepository.GetAll());
         }
 
+        [HttpGet]
+        public IActionResult Edit(int userId)
+        {
+            var user = _userRepository.GetAll().FirstOrDefault(x => x.Id == userId);
 
-        //[HttpGet]
-        //public IActionResult Edit(int userId)
-        //{
-        //    var user = _users.FirstOrDefault(x => x.Id == userId);
+            return View(user);
+        }
 
-        //    return View(user);
-        //}
+        public IActionResult Edit(CustomerViewModel user)
+        {
+            _userRepository.Update(_userMapper.Map(user));
+            _userRepository.SaveChanges();
 
-        //public IActionResult Edit(Models.User newUser)
-        //{
-        //    var user = _users.FirstOrDefault(x => x.Id == newUser.Id);
+            return View("Index", _userRepository.GetAll());
+        }
 
-        //    user.Name = newUser.Name;
+        public IActionResult Delete(int userId)
+        {
+            _userRepository.GetAll().Remove(_userRepository.GetAll().FirstOrDefault(x => x.Id == userId));
+            _userRepository.SaveChanges();
 
-        //    return View("Index", _users);
-        //}
+            return View("Index", _userRepository.GetAll());
+        }
 
-        //public IActionResult Delete(int userId)
-        //{
-        //    _users.Remove(_users.FirstOrDefault(x => x.Id == userId));
+        public IActionResult Details(int userId)
+        {
+            var user = _userRepository.GetAll().FirstOrDefault(x => x.Id == userId);
 
-        //    return View("Index", _users);
-        //}
+            return View(user);
+        }
 
-        //public IActionResult Details(int userId)
-        //{
-        //    var user = _users.FirstOrDefault(x => x.Id == userId);
+        public IActionResult Add()
+        {
+            return View();
+        }
 
-        //    return View(user);
-        //}
+        [HttpPost]
+        public IActionResult Add(Models.CustomerViewModel user)
+        {
+            var id = _userRepository.GetAll().Select(x => x.Id).Max() + 1;
 
-        //public IActionResult Add()
-        //{
-        //    return View();
-        //}
+            _userRepository.Create(_userMapper.Map(user));
 
-        //[HttpPost]
-        //public IActionResult Add(Models.User user)
-        //{
-        //    var id = _users.Select(x => x.Id).Max() + 1;
-        //    _users.Add(new Models.User
-        //    {
-        //        Id = id,
-        //        Name = user.Name,
-        //    });
-
-        //    return View("Index", _users);
-        //}
+            return View("Index", _userRepository.GetAll());
+        }
     }
 }

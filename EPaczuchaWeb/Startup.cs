@@ -1,15 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 using EPaczucha.database;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,18 +28,19 @@ namespace EPaczuchaWeb
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<EPaczuchaDbContext>();
-            services.AddControllersWithViews();
 
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<ICrudRepository<User>, UserRepository>();
-            services.AddScoped<ISendMethodRepository, SendMethodRepository>();
-            services.AddScoped<ICrudRepository<SendMethod>, SendMethodRepository>();
-            services.AddScoped<IPackagePriceRepository, PackagePriceRepository>();
-            services.AddScoped<ICrudRepository<PackagePrice>, PackagePriceRepository>();
-            services.AddScoped<IPackageTypeRepository, PackageTypeRepository>();
-            services.AddScoped<ICrudRepository<PackageType>, PackageTypeRepository>();
-            services.AddScoped<IPackageRepository, PackageRepository>();
-            services.AddScoped<ICrudRepository<Package>, PackageRepository>();
+            services.AddControllersWithViews();
+            services.AddRazorPages();
+
+            services.AddTransient<ICustomerRepository, CustomerRepository>();
+            services.AddTransient<ISendMethodRepository, SendMethodRepository>();
+            services.AddTransient<IPackagePriceRepository, PackagePriceRepository>();
+            services.AddTransient<IPackageTypeRepository, PackageTypeRepository>();
+            services.AddTransient<IPackageRepository, PackageRepository>();
+            services.AddTransient<ICrudRepository<Package>, PackageRepository>();
+
+
+            services.AddTransient<UserMapper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

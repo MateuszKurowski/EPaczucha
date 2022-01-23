@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Linq;
+
+using EPaczucha.database;
 
 using EPaczuchaWeb.Models;
 
@@ -9,35 +11,51 @@ namespace EPaczuchaWeb.Controllers
 {
     public class PackageController : Controller
     {
-        private int packageId;
+        private readonly IPackageRepository _packageRepository;
+        private readonly IServiceProvider _serviceProvider;
+        private readonly PackageMapper _packageMapper;
 
-        private List<Package> packages;
+        public PackageController(IServiceProvider serviceProvider, IPackageRepository packageRepository, PackageMapper packageMapper)
+        {
+            _serviceProvider = serviceProvider;
+            _packageRepository = packageRepository;
+            _packageMapper = packageMapper;
+        }
 
         public IActionResult Index()
         {
-            return View();
+            //_packageRepository.GetAll().Where(x => x.)
+
+            return View(_packageRepository.GetAll());
         }
 
-        [HttpGet]
-        public IActionResult Edit(int packageId)
+        public IActionResult Index(string userId)
         {
-            var user = packages.FirstOrDefault(x => x.Id == packageId);
+            //_packageRepository.GetAll().Where(x => x.UserId == userId).;
 
-            return View(user);
+            return View(_packageRepository.GetAll());
         }
 
-        public IActionResult Edit(Package packageId)
-        {
-            var package = packages.FirstOrDefault(x => x.Id == packageId.Id);
+        //[HttpGet]
+        //public IActionResult Edit(int packageId)
+        //{
+        //    var user = packages.FirstOrDefault(x => x.Id == packageId);
 
-            return RedirectToAction("Index", "Delivery");
-        }
+        //    return View(user);
+        //}
 
-        public IActionResult Details(int packageId)
-        {
-            var user = packages.FirstOrDefault(x => x.Id == packageId);
+        //public IActionResult Edit(PackageVM packageId)
+        //{
+        //    var package = packages.FirstOrDefault(x => x.Id == packageId.Id);
 
-            return View(user);
-        }
+        //    return RedirectToAction("Index", "Delivery");
+        //}
+
+        //public IActionResult Details(int packageId)
+        //{
+        //    var user = packages.FirstOrDefault(x => x.Id == packageId);
+
+        //    return View(user);
+        //}
     }
 }

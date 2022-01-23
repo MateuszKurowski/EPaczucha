@@ -2,9 +2,8 @@
 
 namespace EPaczucha.database
 {
-    public interface IPackagePriceRepository
+    public interface IPackagePriceRepository : ICrudRepository<PackagePrice>, IRepostiory<PackagePrice>
     {
-        List<PackagePrice> GetAll();
-        void SaveChanges();
+        public IEnumerable<PackagePrice> GetPackagePrice();
     }
 }

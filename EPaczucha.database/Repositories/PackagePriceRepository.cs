@@ -1,20 +1,20 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 using Microsoft.EntityFrameworkCore;
 
 namespace EPaczucha.database
 {
-    public class PackagePriceRepository : BaseRepository<PackagePrice>, IPackagePriceRepository, ICrudRepository<PackagePrice>
+    public class PackagePriceRepository : BaseRepository<PackagePrice>, IPackagePriceRepository
     {
         public PackagePriceRepository(EPaczuchaDbContext dbContext) : base(dbContext) { }
         protected override DbSet<PackagePrice> DbSet => _dbContext.PackagePrices;
 
-        public void Create(PackagePrice packagePrice) => DbSet.Add(packagePrice);
-        public void Delete(PackagePrice packagePrice) => DbSet.Remove(DbSet.Where(x => x.PackagePriceID == packagePrice.PackagePriceID).FirstOrDefault());
-        public PackagePrice GetById(string id) => DbSet.FirstOrDefault(x => x.PackagePriceID.ToString() == id);
+        public IEnumerable<PackagePrice> GetPackagePrice() => DbSet.Select(x => x);
+
         public void Update(PackagePrice packagePrice)
         {
-            var foundPackagePrice = DbSet.Where(x => x.PackagePriceID == packagePrice.PackagePriceID).FirstOrDefault();
+            var foundPackagePrice = DbSet.Where(x => x.Id == packagePrice.Id).FirstOrDefault();
             if (foundPackagePrice == null)
             {
                 Create(packagePrice);

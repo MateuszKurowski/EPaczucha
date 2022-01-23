@@ -1,10 +1,10 @@
 ﻿namespace EPaczucha.database
 {
-    public interface ICrudRepository<Entity> where Entity : class
+    public interface ICrudRepository<Entity> where Entity : BaseEntity
     {
-        void Create(Entity entity);     // C
-        Entity GetById(string id);      // R
-        void Delete(Entity entity);     // U 
+        bool Create(Entity entity);     // C
+        Entity GetById(int id);         // R
+        bool Delete(Entity entity);     // U 
         void Update(Entity entity);     // D
     }
 }

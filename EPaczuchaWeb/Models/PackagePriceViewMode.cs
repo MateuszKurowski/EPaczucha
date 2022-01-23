@@ -1,7 +1,9 @@
-﻿namespace EPaczucha.database
+﻿namespace EPaczuchaWeb.Models
 {
-    public class PackagePrice : BaseEntity
+    public class PackagePriceViewMode
+
     {
+        public int PackagePriceID { get; set; }
         public int Net { get; set; }
         public int VAT { get; set; }
         public int Gross { get; set; }

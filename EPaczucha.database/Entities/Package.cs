@@ -3,15 +3,14 @@
 
 namespace EPaczucha.database
 {
-    public class Package
+    public class Package : BaseEntity
     {
-        public int PackageID { get; set; }
         public string SimpleName { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
-        [ForeignKey("User")]
-        public string UserId { get; set; }
-        public virtual User User { get; set; }
+        [ForeignKey("Customer")]
+        public int UserId { get; set; }
+        public virtual Customer Customer { get; set; }
         [ForeignKey("PackagePrice")]
         public int PackagePriceID { get; set; }
         public virtual PackagePrice PackagePrice { get; set; }

@@ -2,9 +2,8 @@
 
 namespace EPaczucha.database
 {
-    public interface IPackageTypeRepository
+    public interface IPackageTypeRepository : ICrudRepository<PackageType>, IRepostiory<PackageType>
     {
-        List<PackageType> GetAll();
-        void SaveChanges();
+        public IEnumerable<PackageType> GetPackageType();
     }
 }

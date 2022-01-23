@@ -5,17 +5,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EPaczucha.database
 {
-    public class PackageRepository : BaseRepository<Package>, ICrudRepository<Package>, IPackageRepository
+    public class PackageRepository : BaseRepository<Package>, IPackageRepository
     {
         public PackageRepository(EPaczuchaDbContext dbContext) : base(dbContext) { }
         protected override DbSet<Package> DbSet => _dbContext.Packages;
 
-        public void Create(Package package) => DbSet.Add(package);
-        public void Delete(Package package) => DbSet.Remove(DbSet.Where(x => x.PackageID == package.PackageID).FirstOrDefault());
-        public Package GetById(string id) => DbSet.FirstOrDefault(x => x.PackageID.ToString() == id);
+        public IEnumerable<Package> GetPackage() => DbSet.Include(x => x.SendMethod).Include(x => x.PackageType).Include(x => x.PackagePrice).Select(x => x);
         public void Update(Package package)
         {
-            var foundPackage = DbSet.Where(x => x.PackageID == package.PackageID).FirstOrDefault();
+            var foundPackage = DbSet.Where(x => x.Id == package.Id).FirstOrDefault();
             if (foundPackage == null)
             {
                 Create(package);

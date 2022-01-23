@@ -1,20 +1,20 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 using Microsoft.EntityFrameworkCore;
 
 namespace EPaczucha.database
 {
-    public class SendMethodRepository : BaseRepository<SendMethod>, ICrudRepository<SendMethod>, ISendMethodRepository
+    public class SendMethodRepository : BaseRepository<SendMethod>, ISendMethodRepository
     {
         public SendMethodRepository(EPaczuchaDbContext dbContext) : base(dbContext) { }
         protected override DbSet<SendMethod> DbSet => _dbContext.SendMethods;
 
-        public void Create(SendMethod sendMethod) => DbSet.Add(sendMethod);
-        public void Delete(SendMethod sendMethod) => DbSet.Remove(DbSet.Where(x => x.SendMethodId == sendMethod.SendMethodId).FirstOrDefault());
-        public SendMethod GetById(string id) => DbSet.FirstOrDefault(x => x.SendMethodId.ToString() == id);
+        public IEnumerable<SendMethod> GetSendMethod() => DbSet.Select(x => x);
+
         public void Update(SendMethod sendMethod)
         {
-            var foundSendMethod = DbSet.Where(x => x.SendMethodId == sendMethod.SendMethodId).FirstOrDefault();
+            var foundSendMethod = DbSet.Where(x => x.Id == sendMethod.Id).FirstOrDefault();
             if (foundSendMethod == null)
             {
                 Create(sendMethod);

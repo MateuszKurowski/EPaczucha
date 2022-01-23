@@ -2,9 +2,8 @@
 
 namespace EPaczucha.database
 {
-    public interface ISendMethodRepository
+    public interface ISendMethodRepository : ICrudRepository<SendMethod>, IRepostiory<SendMethod>
     {
-        List<SendMethod> GetAll();
-        void SaveChanges();
+        public IEnumerable<SendMethod> GetSendMethod();
     }
 }

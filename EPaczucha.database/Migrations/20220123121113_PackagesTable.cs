@@ -7,10 +7,31 @@ namespace EPaczucha.database.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "PackagePrices",
+                name: "Customer",
                 columns: table => new
                 {
-                    PackagePriceID = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Street = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BuildingNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ApartmentNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Customer", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PackagePrice",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Net = table.Column<int>(type: "int", nullable: false),
                     VAT = table.Column<int>(type: "int", nullable: false),
@@ -18,14 +39,14 @@ namespace EPaczucha.database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PackagePrices", x => x.PackagePriceID);
+                    table.PrimaryKey("PK_PackagePrice", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "PackageType",
                 columns: table => new
                 {
-                    PackageTypeId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TypeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Width = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -34,62 +55,63 @@ namespace EPaczucha.database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PackageType", x => x.PackageTypeId);
+                    table.PrimaryKey("PK_PackageType", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "SendMethod",
                 columns: table => new
                 {
-                    SendMethodId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MethodName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SendMethod", x => x.SendMethodId);
+                    table.PrimaryKey("PK_SendMethod", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Packages",
                 columns: table => new
                 {
-                    PackageID = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    SimpleName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StartDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EndDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     PackagePriceID = table.Column<int>(type: "int", nullable: false),
                     PackageTypeID = table.Column<int>(type: "int", nullable: false),
                     SendMethodID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Packages", x => x.PackageID);
+                    table.PrimaryKey("PK_Packages", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Packages_AspNetUsers_UserId",
+                        name: "FK_Packages_Customer_UserId",
                         column: x => x.UserId,
-                        principalTable: "AspNetUsers",
+                        principalTable: "Customer",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Packages_PackagePrices_PackagePriceID",
+                        name: "FK_Packages_PackagePrice_PackagePriceID",
                         column: x => x.PackagePriceID,
-                        principalTable: "PackagePrices",
-                        principalColumn: "PackagePriceID",
+                        principalTable: "PackagePrice",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Packages_PackageType_PackageTypeID",
                         column: x => x.PackageTypeID,
                         principalTable: "PackageType",
-                        principalColumn: "PackageTypeId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Packages_SendMethod_SendMethodID",
                         column: x => x.SendMethodID,
                         principalTable: "SendMethod",
-                        principalColumn: "SendMethodId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -120,7 +142,10 @@ namespace EPaczucha.database.Migrations
                 name: "Packages");
 
             migrationBuilder.DropTable(
-                name: "PackagePrices");
+                name: "Customer");
+
+            migrationBuilder.DropTable(
+                name: "PackagePrice");
 
             migrationBuilder.DropTable(
                 name: "PackageType");

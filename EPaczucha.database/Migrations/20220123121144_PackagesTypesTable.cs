@@ -2,7 +2,7 @@
 
 namespace EPaczucha.database.Migrations
 {
-    public partial class PackagesTypeTable : Migration
+    public partial class PackagesTypesTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -21,14 +21,14 @@ namespace EPaczucha.database.Migrations
             migrationBuilder.AddPrimaryKey(
                 name: "PK_PackagesTypes",
                 table: "PackagesTypes",
-                column: "PackageTypeId");
+                column: "Id");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Packages_PackagesTypes_PackageTypeID",
                 table: "Packages",
                 column: "PackageTypeID",
                 principalTable: "PackagesTypes",
-                principalColumn: "PackageTypeId",
+                principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
         }
 
@@ -49,14 +49,14 @@ namespace EPaczucha.database.Migrations
             migrationBuilder.AddPrimaryKey(
                 name: "PK_PackageType",
                 table: "PackageType",
-                column: "PackageTypeId");
+                column: "Id");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Packages_PackageType_PackageTypeID",
                 table: "Packages",
                 column: "PackageTypeID",
                 principalTable: "PackageType",
-                principalColumn: "PackageTypeId",
+                principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
         }
     }

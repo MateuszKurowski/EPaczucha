@@ -2,7 +2,7 @@
 
 namespace EPaczucha.database.Migrations
 {
-    public partial class SendMethodTable : Migration
+    public partial class SendMethodsTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -21,14 +21,14 @@ namespace EPaczucha.database.Migrations
             migrationBuilder.AddPrimaryKey(
                 name: "PK_SendMethods",
                 table: "SendMethods",
-                column: "SendMethodId");
+                column: "Id");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Packages_SendMethods_SendMethodID",
                 table: "Packages",
                 column: "SendMethodID",
                 principalTable: "SendMethods",
-                principalColumn: "SendMethodId",
+                principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
         }
 
@@ -49,14 +49,14 @@ namespace EPaczucha.database.Migrations
             migrationBuilder.AddPrimaryKey(
                 name: "PK_SendMethod",
                 table: "SendMethod",
-                column: "SendMethodId");
+                column: "Id");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Packages_SendMethod_SendMethodID",
                 table: "Packages",
                 column: "SendMethodID",
                 principalTable: "SendMethod",
-                principalColumn: "SendMethodId",
+                principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
         }
     }
