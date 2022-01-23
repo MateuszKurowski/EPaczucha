@@ -12,14 +12,14 @@ namespace EPaczucha.core
         private readonly IPackageTypeRepository _packageTypeRepository;
         private readonly IPackagePriceRepository _packagePriceRepository;
         private readonly ISendMethodRepository _sendMethodRepository;
-        private readonly MappersDto _mappersDto;
+        private readonly MapperDto _mappersDto;
 
         public ManagerDto(ICustomerRepository customerRepository,
                           IPackageRepository packageRepository,
                           IPackageTypeRepository packageTypeRepository,
                           IPackagePriceRepository packagePriceRepository,
                           ISendMethodRepository sendMethodRepository,
-                          MappersDto mappersDto)
+                          MapperDto mappersDto)
         {
             _customerRepository = customerRepository;
             _packageRepository = packageRepository;

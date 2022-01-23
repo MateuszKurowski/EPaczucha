@@ -14,17 +14,17 @@ namespace EPaczuchaWeb
         {
             _mapper = new MapperConfiguration(config =>
             {
-                config.CreateMap<PackagePrice, PackagePriceViewMode>()
+                config.CreateMap<PackagePrice, PackagePriceViewModel>()
                 .ReverseMap();
             }).CreateMapper();
         }
 
-        public PackagePriceViewMode Map(PackagePrice user)
+        public PackagePriceViewModel Map(PackagePrice user)
         {
-            return _mapper.Map<PackagePriceViewMode>(user);
+            return _mapper.Map<PackagePriceViewModel>(user);
         }
 
-        public PackagePrice Map(PackagePriceViewMode user)
+        public PackagePrice Map(PackagePriceViewModel user)
         {
             return _mapper.Map<PackagePrice>(user);
         }

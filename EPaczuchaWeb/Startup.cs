@@ -42,7 +42,8 @@ namespace EPaczuchaWeb
             services.AddTransient<IPackageRepository, PackageRepository>();
             services.AddTransient<ICrudRepository<Package>, PackageRepository>();
 
-            services.AddTransient<MappersDto>();
+            services.AddTransient<MapperDto>();
+            services.AddTransient<MapperViewModel>();
             services.AddTransient<IManagerDto, ManagerDto>();
         }
 

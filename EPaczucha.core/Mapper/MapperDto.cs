@@ -6,11 +6,11 @@ using EPaczucha.database;
 
 namespace EPaczucha.core
 {
-    public class MappersDto
+    public class MapperDto
     {
         private IMapper _mapper;
 
-        public MappersDto()
+        public MapperDto()
         {
             _mapper = new MapperConfiguration(config =>
             {
