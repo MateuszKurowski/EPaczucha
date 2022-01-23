@@ -22,6 +22,7 @@ namespace EPaczucha.database
             {
                 foundPackage.SimpleName = package.SimpleName;
                 foundPackage.StartDate = package.StartDate;
+                SaveChanges();
             }
         }
     }

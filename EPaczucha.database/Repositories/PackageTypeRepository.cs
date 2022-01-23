@@ -24,6 +24,7 @@ namespace EPaczucha.database
                 foundPackageType.Height = packageType.Height;
                 foundPackageType.Price = packageType.Price;
                 foundPackageType.Width = packageType.Width;
+                SaveChanges();
             }
         }
     }

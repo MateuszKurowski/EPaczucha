@@ -15,7 +15,7 @@ namespace EPaczucha.database
 
         public bool Delete(Entity entity)
         {
-            DbSet.Remove(DbSet.Where(x => x.Id == entity.Id).FirstOrDefault());
+            DbSet.Remove(DbSet.Where(x => x.Id == entity.Id)?.FirstOrDefault());
             return SaveChanges();
         }
 

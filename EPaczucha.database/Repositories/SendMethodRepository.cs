@@ -23,6 +23,7 @@ namespace EPaczucha.database
             {
                 foundSendMethod.Price = sendMethod.Price;
                 foundSendMethod.MethodName = sendMethod.MethodName;
+                SaveChanges();
             }
         }
     }

@@ -51,25 +51,33 @@ namespace EPaczuchaWeb.Controllers
             return View(_mapperViewModel.Map(dtos));
         }
 
-        public IActionResult Details(int customerId)
+        public IActionResult Details(int id)
         {
-            var dto =_managerDto.GetCustomers(null).Where(x => x.Id == customerId).FirstOrDefault();
+            var dto =_managerDto.GetCustomers(null).Where(x => x.Id == id).FirstOrDefault();
 
             return View(_mapperViewModel.Map(dto));
         }
 
-        [HttpPut]
-        public IActionResult Edit(int customerId)
+        public IActionResult Edit(int id)
         {
-            _managerDto.EditCustomer(customerId);
+            var dto = _managerDto.GetCustomers(null).Where(x => x.Id == id).FirstOrDefault();
 
-            return RedirectToAction("Details");
+            return View("Edit", _mapperViewModel.Map(dto));
         }
 
-        [HttpDelete]
-        public IActionResult Delete(int customerId)
+        [HttpPost]
+        public IActionResult Edit(CustomerViewModel customer)
         {
-            _managerDto.DeleteCustomer(new CustomerDto { Id = customerId });
+            var dto =_mapperViewModel.Map(customer);
+
+            _managerDto.EditCustomer(dto);
+
+            return RedirectToAction("Details", customer);
+        }
+
+        public IActionResult Delete(int id)
+        {
+            _managerDto.DeleteCustomer(new CustomerDto { Id = id });
 
             return RedirectToAction("Index");
         }

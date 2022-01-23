@@ -14,7 +14,7 @@ namespace EPaczucha.database
             .Include(x => x.Packages).ThenInclude(x => x.SendMethod)
             .Include(x => x.Packages).ThenInclude(x => x.PackageType)
             .Include(x => x.Packages).ThenInclude(x => x.PackagePrice)
-            */.Select(x => x);
+            */.Select(x => x).ToList();
 
         public void Update(Customer customer)
         {
@@ -34,6 +34,7 @@ namespace EPaczucha.database
                 foundUser.ZipCode = customer.ZipCode;
                 foundUser.PhoneNumber = customer.PhoneNumber;
                 foundUser.BuildingNumber = customer.BuildingNumber;
+                SaveChanges();
             }
         }
     }

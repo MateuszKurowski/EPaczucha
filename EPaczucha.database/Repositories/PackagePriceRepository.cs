@@ -23,6 +23,7 @@ namespace EPaczucha.database
             {
                 foundPackagePrice.Net = packagePrice.Net;
                 foundPackagePrice.Gross = packagePrice.Gross;
+                SaveChanges();
             }
         }
     }

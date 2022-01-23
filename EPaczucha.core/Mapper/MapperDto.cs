@@ -29,52 +29,52 @@ namespace EPaczucha.core
 
         #region Customer
         public CustomerDto Map(Customer customer) => _mapper.Map<CustomerDto>(customer);
-        public IEnumerable<CustomerDto> Map(IEnumerable<Customer> customers)
-            => _mapper.Map<IEnumerable<CustomerDto>>(customers);
+        public List<CustomerDto> Map(List<Customer> customers)
+            => _mapper.Map<List<CustomerDto>>(customers);
 
         public Customer Map(CustomerDto customer) => _mapper.Map<Customer>(customer);
-        public IEnumerable<Customer> Map(IEnumerable<CustomerDto> customers)
-            => _mapper.Map<IEnumerable<Customer>>(customers);
+        public List<Customer> Map(List<CustomerDto> customers)
+            => _mapper.Map<List<Customer>>(customers);
         #endregion
 
         #region Package
         public PackageDto Map(Package Package) => _mapper.Map<PackageDto>(Package);
-        public IEnumerable<PackageDto> Map(IEnumerable<Package> Packages)
-            => _mapper.Map<IEnumerable<PackageDto>>(Packages);
+        public List<PackageDto> Map(List<Package> Packages)
+            => _mapper.Map<List<PackageDto>>(Packages);
 
         public Package Map(PackageDto Package) => _mapper.Map<Package>(Package);
-        public IEnumerable<Package> Map(IEnumerable<PackageDto> Packages)
-            => _mapper.Map<IEnumerable<Package>>(Packages);
+        public List<Package> Map(List<PackageDto> Packages)
+            => _mapper.Map<List<Package>>(Packages);
         #endregion
 
         #region PackageType
         public PackageTypeDto Map(PackageType PackageType) => _mapper.Map<PackageTypeDto>(PackageType);
-        public IEnumerable<PackageTypeDto> Map(IEnumerable<PackageType> PackageTypes)
-            => _mapper.Map<IEnumerable<PackageTypeDto>>(PackageTypes);
+        public List<PackageTypeDto> Map(List<PackageType> PackageTypes)
+            => _mapper.Map<List<PackageTypeDto>>(PackageTypes);
 
         public PackageType Map(PackageTypeDto PackageType) => _mapper.Map<PackageType>(PackageType);
-        public IEnumerable<PackageType> Map(IEnumerable<PackageTypeDto> PackageTypes)
-            => _mapper.Map<IEnumerable<PackageType>>(PackageTypes);
+        public List<PackageType> Map(List<PackageTypeDto> PackageTypes)
+            => _mapper.Map<List<PackageType>>(PackageTypes);
         #endregion
 
         #region PackagePrice
         public PackagePriceDto Map(PackagePrice PackagePrice) => _mapper.Map<PackagePriceDto>(PackagePrice);
-        public IEnumerable<PackagePriceDto> Map(IEnumerable<PackagePrice> PackagePrices)
-            => _mapper.Map<IEnumerable<PackagePriceDto>>(PackagePrices);
+        public List<PackagePriceDto> Map(List<PackagePrice> PackagePrices)
+            => _mapper.Map<List<PackagePriceDto>>(PackagePrices);
 
         public PackagePrice Map(PackagePriceDto PackagePrice) => _mapper.Map<PackagePrice>(PackagePrice);
-        public IEnumerable<PackagePrice> Map(IEnumerable<PackagePriceDto> PackagePrices)
-            => _mapper.Map<IEnumerable<PackagePrice>>(PackagePrices);
+        public List<PackagePrice> Map(List<PackagePriceDto> PackagePrices)
+            => _mapper.Map<List<PackagePrice>>(PackagePrices);
         #endregion
 
         #region SendMethod
         public SendMethodDto Map(SendMethod SendMethod) => _mapper.Map<SendMethodDto>(SendMethod);
-        public IEnumerable<SendMethodDto> Map(IEnumerable<SendMethod> SendMethods)
-            => _mapper.Map<IEnumerable<SendMethodDto>>(SendMethods);
+        public List<SendMethodDto> Map(List<SendMethod> SendMethods)
+            => _mapper.Map<List<SendMethodDto>>(SendMethods);
 
         public SendMethod Map(SendMethodDto SendMethod) => _mapper.Map<SendMethod>(SendMethod);
-        public IEnumerable<SendMethod> Map(IEnumerable<SendMethodDto> SendMethods)
-            => _mapper.Map<IEnumerable<SendMethod>>(SendMethods);
+        public List<SendMethod> Map(List<SendMethodDto> SendMethods)
+            => _mapper.Map<List<SendMethod>>(SendMethods);
         #endregion
     }
 }

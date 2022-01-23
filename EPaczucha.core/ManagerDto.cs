@@ -29,23 +29,23 @@ namespace EPaczucha.core
             _mappersDto = mappersDto;
         }
 
-        public IEnumerable<CustomerDto> GetCustomers(string filterString)
+        public List<CustomerDto> GetCustomers(string filterString)
         {
             var customerEntities = _customerRepository.GetCustomers();
 
-            if (string.IsNullOrEmpty(filterString))
+            if (!string.IsNullOrEmpty(filterString))
             {
                 customerEntities = customerEntities.Where(x => x.FirstName.Contains(filterString) || x.LastName.Contains(filterString));
             }
 
-            return _mappersDto.Map(customerEntities);
+            return _mappersDto.Map(customerEntities.ToList());
         }
 
         public decimal GetPriceFromPackageType(int typeId) => _packageTypeRepository.GetById(typeId).Price;
 
         public decimal GetPriceFromSendMethod(int sendMethodId) => _sendMethodRepository.GetById(sendMethodId).Price;
 
-        public IEnumerable<PackageDto> GetPackagesByCustomer(int customerId, string filterString)
+        public List<PackageDto> GetPackagesByCustomer(int customerId, string filterString)
         {
             var packageEntities = _packageRepository.GetPackage().Where(x => x.Id == customerId);
 
@@ -54,7 +54,7 @@ namespace EPaczucha.core
                 packageEntities = packageEntities.Where(x => x.SimpleName.Contains(filterString));
             }
 
-            return _mappersDto.Map(packageEntities);
+            return _mappersDto.Map(packageEntities.ToList());
         }
 
         public void AddNewPackages(PackageDto package, int userId, int sendMethodId, int packagePriceId, int packageTypeId)
@@ -103,10 +103,10 @@ namespace EPaczucha.core
             return _packagePriceRepository.GetAll().Where(x => x.Gross == entity.Gross && x.Net == entity.Net)?.FirstOrDefault()?.Id;
         }
 
-        public void EditCustomer(int customerId)
+        public void EditCustomer(CustomerDto customer)
         {
-            var customer = _customerRepository.GetById(customerId);
-            _customerRepository.Update(customer);
+            var customerEntity = _mappersDto.Map(customer);
+            _customerRepository.Update(customerEntity);
         }
     }
 }
