@@ -22,6 +22,6 @@ namespace EPaczucha.database
         public virtual SendMethod SendMethod { get; set; }
         [ForeignKey("Destination")]
         public int DestinationId { get; set; }
-        public virtual Test Destination { get; set; }
+        public virtual Destination Destination { get; set; }
     }
 }

@@ -5,14 +5,14 @@ namespace EPaczuchaWeb.Models
     public class DestinationViewModel
     {
         [DisplayName("Miasto")]
-        public string DestinationCity { get; set; }
+        public string City { get; set; }
         [DisplayName("Ulica")]
-        public string DestinationStreet { get; set; }
+        public string Street { get; set; }
         [DisplayName("Numer budynku")]
-        public string DestinationBuildingNumber { get; set; }
+        public string BuildingNumber { get; set; }
         [DisplayName("Numer mieszkania")]
-        public string DestinationApartmentNumber { get; set; }
+        public string ApartmentNumber { get; set; }
         [DisplayName("Kod miasta")]
-        public string DestinationZipCode { get; set; }
+        public string ZipCode { get; set; }
     }
 }

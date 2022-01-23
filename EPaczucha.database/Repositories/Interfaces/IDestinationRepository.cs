@@ -2,8 +2,8 @@
 
 namespace EPaczucha.database
 {
-    public interface IDestinationRepository : ICrudRepository<Test>, IRepostiory<Test>
+    public interface IDestinationRepository : ICrudRepository<Destination>, IRepostiory<Destination>
     {
-        public IEnumerable<Test> GetCustomers();
+        public IEnumerable<Destination> GetCustomers();
     }
 }

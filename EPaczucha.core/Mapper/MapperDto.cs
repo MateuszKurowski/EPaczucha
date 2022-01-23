@@ -80,13 +80,13 @@ namespace EPaczucha.core
         #endregion
 
         #region Destination
-        public DestinationDto Map(Test destination) => _mapper.Map<DestinationDto>(destination);
-        public List<DestinationDto> Map(List<Test> destination)
+        public DestinationDto Map(Destination destination) => _mapper.Map<DestinationDto>(destination);
+        public List<DestinationDto> Map(List<Destination> destination)
             => _mapper.Map<List<DestinationDto>>(destination);
 
-        public Test Map(DestinationDto destination) => _mapper.Map<Test>(destination);
-        public List<Test> Map(List<DestinationDto> destination)
-            => _mapper.Map<List<Test>>(destination);
+        public Destination Map(DestinationDto destination) => _mapper.Map<Destination>(destination);
+        public List<Destination> Map(List<DestinationDto> destination)
+            => _mapper.Map<List<Destination>>(destination);
         #endregion
     }
 }
