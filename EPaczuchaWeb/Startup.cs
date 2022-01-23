@@ -1,5 +1,6 @@
 using System;
 
+using EPaczucha.core;
 using EPaczucha.database;
 
 using Microsoft.AspNetCore.Builder;
@@ -23,7 +24,9 @@ namespace EPaczuchaWeb
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<EPaczuchaDbContext>(options => options.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=EPaczuchaDatabase;Trusted_Connection=True;"));
+            services.AddDbContext<EPaczuchaDbContext>(options => options
+            .UseSqlServer("Server=localhost\\SQLEXPRESS;Database=EPaczuchaDatabase;Trusted_Connection=True;"));
+
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -39,11 +42,10 @@ namespace EPaczuchaWeb
             services.AddTransient<IPackageRepository, PackageRepository>();
             services.AddTransient<ICrudRepository<Package>, PackageRepository>();
 
-
-            services.AddTransient<UserMapper>();
+            services.AddTransient<MappersDto>();
+            services.AddTransient<IManagerDto, ManagerDto>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
@@ -54,7 +56,6 @@ namespace EPaczuchaWeb
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseHttpsRedirection();

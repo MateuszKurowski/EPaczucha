@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EPaczucha.core\EPaczucha.core.csproj" />
     <ProjectReference Include="..\EPaczucha.database\EPaczucha.database.csproj" />
   </ItemGroup>
 
