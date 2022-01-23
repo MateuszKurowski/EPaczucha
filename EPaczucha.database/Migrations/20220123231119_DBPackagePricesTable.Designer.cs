@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EPaczucha.database.Migrations
 {
     [DbContext(typeof(EPaczuchaDbContext))]
-    [Migration("20220123200637_PackageTypesTableDB")]
-    partial class PackageTypesTableDB
+    [Migration("20220123231119_DBPackagePricesTable")]
+    partial class DBPackagePricesTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -73,36 +73,12 @@ namespace EPaczucha.database.Migrations
                     b.Property<decimal>("Net")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("VAT")
-                        .HasColumnType("int");
+                    b.Property<decimal>("VAT")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
                     b.ToTable("PackagePrices");
-                });
-
-            modelBuilder.Entity("EPaczucha.database.PackageType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Height")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("TypeName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Width")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PackagesTypes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

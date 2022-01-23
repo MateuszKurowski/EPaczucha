@@ -20,5 +20,26 @@ namespace EPaczuchaWeb.Models
         public PackagePriceViewModel PackagePrice { get; set; }
         public PackageTypeViewModel PackageType { get; set; }
         public SendMethodViewModel SendMethod { get; set; }
+
+
+        [DisplayName("Miasto")]
+        [Required]
+        [MinLength(length: 2, ErrorMessage = "Proszę podać poprawną nazwę miasta!")]
+        public string DestinationCity { get; set; }
+        [DisplayName("Ulica")]
+        [Required]
+        [MaxLength(length: 50, ErrorMessage = "Proszę podać poprawną nazwę ulicy!")]
+        public string DestinationStreet { get; set; }
+        [DisplayName("Numer budynku")]
+        [Required]
+        [Range(1, 3000, ErrorMessage = "Proszę podać poprawny numer budynku!")]
+        public string DestinationBuildingNumber { get; set; }
+        [DisplayName("Numer mieszkania")]
+        [Range(1, 300, ErrorMessage = "Proszę podać poprawny numer mieszkania!")]
+        public string DestinationApartmentNumber { get; set; }
+        [DisplayName("Kod pocztowy")]
+        [Required]
+        [RegularExpression("[0-9]{2}-[0-9]{3}", ErrorMessage = "Proszę podać poprawny kod pocztowy!")]
+        public string DestinationZipCode { get; set; }
     }
 }

@@ -92,6 +92,9 @@ namespace EPaczucha.database.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
                     b.Property<int>("DestinationId")
                         .HasColumnType("int");
 
@@ -113,10 +116,9 @@ namespace EPaczucha.database.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
 
                     b.HasIndex("DestinationId");
 
@@ -125,8 +127,6 @@ namespace EPaczucha.database.Migrations
                     b.HasIndex("PackageTypeID");
 
                     b.HasIndex("SendMethodID");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Packages");
                 });
@@ -144,8 +144,8 @@ namespace EPaczucha.database.Migrations
                     b.Property<decimal>("Net")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("VAT")
-                        .HasColumnType("int");
+                    b.Property<decimal>("VAT")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -155,9 +155,7 @@ namespace EPaczucha.database.Migrations
             modelBuilder.Entity("EPaczucha.database.PackageType", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("Height")
                         .HasColumnType("nvarchar(max)");
@@ -179,9 +177,7 @@ namespace EPaczucha.database.Migrations
             modelBuilder.Entity("EPaczucha.database.SendMethod", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("MethodName")
                         .HasColumnType("nvarchar(max)");
@@ -396,6 +392,12 @@ namespace EPaczucha.database.Migrations
 
             modelBuilder.Entity("EPaczucha.database.Package", b =>
                 {
+                    b.HasOne("EPaczucha.database.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("EPaczucha.database.Destination", "Destination")
                         .WithMany()
                         .HasForeignKey("DestinationId")
@@ -417,12 +419,6 @@ namespace EPaczucha.database.Migrations
                     b.HasOne("EPaczucha.database.SendMethod", "SendMethod")
                         .WithMany()
                         .HasForeignKey("SendMethodID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EPaczucha.database.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

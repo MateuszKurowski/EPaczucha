@@ -35,17 +35,17 @@ namespace EPaczuchaWeb
             services.AddControllersWithViews();
             services.AddRazorPages();
 
-            //services.AddTransient<ICustomerRepository, CustomerRepository>();
-            //services.AddTransient<ISendMethodRepository, SendMethodRepository>();
-            //services.AddTransient<IPackagePriceRepository, PackagePriceRepository>();
-            //services.AddScoped<IPackageTypeRepository, PackageTypeRepository>();
-            //services.AddTransient<IPackageRepository, PackageRepository>();
-            //services.AddTransient<IDestinationRepository, DestinationRepository>();
-            //services.AddTransient<ICrudRepository<Package>, PackageRepository>();
+            services.AddTransient<ICustomerRepository, CustomerRepository>();
+            services.AddTransient<ISendMethodRepository, SendMethodRepository>();
+            services.AddTransient<IPackagePriceRepository, PackagePriceRepository>();
+            services.AddTransient<IPackageTypeRepository, PackageTypeRepository>();
+            services.AddTransient<IPackageRepository, PackageRepository>();
+            services.AddTransient<IDestinationRepository, DestinationRepository>();
+            services.AddTransient<ICrudRepository<Package>, PackageRepository>();
 
-            //services.AddTransient<MapperDto>();
-            //services.AddTransient<MapperViewModel>();
-            //services.AddScoped<IManagerDto, ManagerDto>();
+            services.AddTransient<MapperDto>();
+            services.AddTransient<MapperViewModel>();
+            services.AddTransient<IManagerDto, ManagerDto>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)

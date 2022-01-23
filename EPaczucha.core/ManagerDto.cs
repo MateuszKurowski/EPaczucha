@@ -50,9 +50,9 @@ namespace EPaczucha.core
 
         public List<PackageDto> GetPackagesByCustomer(int customerId, string filterString)
         {
-            var packageEntities = _packageRepository.GetPackage().Where(x => x.Id == customerId);
+            var packageEntities = _packageRepository.GetPackage().Where(x => x.CustomerId == customerId);
 
-            if (string.IsNullOrEmpty(filterString))
+            if (!string.IsNullOrEmpty(filterString))
             {
                 packageEntities = packageEntities.Where(x => x.SimpleName.Contains(filterString));
             }
@@ -60,50 +60,65 @@ namespace EPaczucha.core
             return _mappersDto.Map(packageEntities.ToList());
         }
 
-        public void AddNewPackages(PackageDto package, int userId, int sendMethodId, int packagePriceId, int packageTypeId)
+        public int AddNewPackages(PackageDto package, int customerId, int packageTypeId, int packagePriceId, int sendMethodId, int destinationId)
         {
             var entity = _mappersDto.Map(package);
-
-            entity.UserId = userId;
+            entity.CustomerId = customerId;
             entity.PackageTypeID = packageTypeId;
+            if (entity.PackageType?.Id != null)
+                entity.PackageType.Id = 0;
             entity.PackagePriceID = packagePriceId;
             entity.SendMethodID = sendMethodId;
+            if (entity.SendMethod?.Id != null)
+                entity.SendMethod.Id = 0;
+            entity.DestinationId = destinationId;
+            if (entity.Destination?.Id != null)
+                entity.Destination.Id = 0;
 
-            _packageRepository.Create(entity);
+            var i = _packageRepository.Create(entity);
+            _packageRepository.SaveChanges();
+            return i;
         }
 
-        public void AddNewCustomer(CustomerDto customer)
+        public int AddNewCustomer(CustomerDto customer)
         {
             var entity = _mappersDto.Map(customer);
-
-            _customerRepository.Create(entity);
+            
+            var i = _customerRepository.Create(entity);
+            _customerRepository.SaveChanges();
+            return i;
         }
 
         public bool DeleteCustomer(CustomerDto customer)
         {
             var entity = _mappersDto.Map(customer);
-            return _customerRepository.Delete(entity);
+            _customerRepository.Delete(entity);
+            return _customerRepository.SaveChanges();
         }
 
         public bool DeletePackage(PackageDto package)
         {
             var entity = _mappersDto.Map(package);
-            return _packageRepository.Delete(entity);
+            _packageRepository.Delete(entity);
+            return _packageRepository.SaveChanges();
         }
 
         public PackageDto GetPackageById(int packageId)
         {
             var entity = _packageRepository.GetById(packageId);
+            entity.Destination = _destinationRepository.GetById(entity.DestinationId);
+            entity.SendMethod = _sendMethodRepository.GetById(entity.SendMethodID);
+            entity.PackageType = _packageTypeRepository.GetById(entity.PackageTypeID);
+            entity.PackagePrice = _packagePriceRepository.GetById(entity.PackagePriceID);
             return _mappersDto.Map(entity);
         }
 
-        public int? AddNewPackagePrice(PackagePriceDto packagePrice)
+        public int AddNewPackagePrice(PackagePriceDto packagePrice)
         {
             var entity = _mappersDto.Map(packagePrice);
-
-            _packagePriceRepository.Create(entity);
-
-            return _packagePriceRepository.GetAll().Where(x => x.Gross == entity.Gross && x.Net == entity.Net)?.FirstOrDefault()?.Id;
+             var i = _packagePriceRepository.Create(entity);
+            _packagePriceRepository.SaveChanges();
+            return i;
         }
 
         public void EditCustomer(CustomerDto customer)
@@ -112,17 +127,19 @@ namespace EPaczucha.core
             _customerRepository.Update(customerEntity);
         }
 
-        public void AddNewDestination(DestinationDto destination)
+        public int AddNewDestination(DestinationDto destination)
         {
             var entity = _mappersDto.Map(destination);
-
-            _destinationRepository.Create(entity);
+            var i = _destinationRepository.Create(entity);
+            _destinationRepository.SaveChanges();
+            return i;
         }
 
         public bool DeleteDestination(DestinationDto destination)
         {
             var entity = _mappersDto.Map(destination);
-            return _destinationRepository.Delete(entity);
+            _destinationRepository.Delete(entity);
+            return _destinationRepository.SaveChanges();
         }
 
         public PackageTypeDto GetPackageTypeById(int packageTypeById)

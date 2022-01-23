@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EPaczucha.database.Migrations
 {
-    public partial class PackageTableDB : Migration
+    public partial class DBPackagesTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,7 +16,7 @@ namespace EPaczucha.database.Migrations
                     SimpleName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
                     PackagePriceID = table.Column<int>(type: "int", nullable: false),
                     PackageTypeID = table.Column<int>(type: "int", nullable: false),
                     SendMethodID = table.Column<int>(type: "int", nullable: false),
@@ -26,8 +26,8 @@ namespace EPaczucha.database.Migrations
                 {
                     table.PrimaryKey("PK_Packages", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Packages_Customers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Packages_Customers_CustomerId",
+                        column: x => x.CustomerId,
                         principalTable: "Customers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -58,6 +58,11 @@ namespace EPaczucha.database.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Packages_CustomerId",
+                table: "Packages",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Packages_DestinationId",
                 table: "Packages",
                 column: "DestinationId");
@@ -76,11 +81,6 @@ namespace EPaczucha.database.Migrations
                 name: "IX_Packages_SendMethodID",
                 table: "Packages",
                 column: "SendMethodID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Packages_UserId",
-                table: "Packages",
-                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

@@ -9,7 +9,7 @@ namespace EPaczuchaWeb.Models
         [DisplayName("Netto")]
         public decimal Net { get; set; }
         [DisplayName("Podatek VAT")]
-        public int VAT { get; set; }
+        public decimal VAT { get; set; }
         [DisplayName("Brutto")]
         public decimal Gross { get; set; }
     }

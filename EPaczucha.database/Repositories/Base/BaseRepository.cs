@@ -19,10 +19,11 @@ namespace EPaczucha.database
             return SaveChanges();
         }
 
-        public bool Create(Entity entity)
+        public int Create(Entity entity)
         {
-            DbSet.ToList().Add(entity);
-            return SaveChanges();
+            var newEntity = DbSet.Add(entity);
+            SaveChanges();
+            return newEntity.Entity.Id;
         }
         public Entity GetById(int id) => DbSet.FirstOrDefault(x => x.Id == id);
 

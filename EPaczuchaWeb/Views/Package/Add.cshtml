@@ -44,12 +44,37 @@
                 </select>
                 <br />
             </div>
+            <div class="form-group">
+                <label asp-for="DestinationCity" class="control-label"></label>
+                <input asp-for="DestinationCity" class="form-control" />
+                <span asp-validation-for="DestinationCity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DestinationStreet" class="control-label"></label>
+                <input asp-for="DestinationStreet" class="form-control" />
+                <span asp-validation-for="DestinationStreet" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DestinationBuildingNumber" class="control-label"></label>
+                <input asp-for="DestinationBuildingNumber" class="form-control" />
+                <span asp-validation-for="DestinationBuildingNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DestinationApartmentNumber" class="control-label"></label>
+                <input asp-for="DestinationApartmentNumber" class="form-control" />
+                <span asp-validation-for="DestinationApartmentNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DestinationZipCode" class="control-label"></label>
+                <input asp-for="DestinationZipCode" class="form-control" />
+                <span asp-validation-for="DestinationZipCode" class="text-danger"></span>
+            </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" asp-route-id="@ViewData["customerId"]">Back to List</a>
 </div>
 
 @section Scripts {

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EPaczucha.database.Migrations
 {
     [DbContext(typeof(EPaczuchaDbContext))]
-    [Migration("20220123200434_CustomersTableDB")]
-    partial class CustomersTableDB
+    [Migration("20220123231130_DBPackageTypesTable")]
+    partial class DBPackageTypesTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -58,6 +58,49 @@ namespace EPaczucha.database.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("EPaczucha.database.PackagePrice", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("Gross")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Net")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("VAT")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PackagePrices");
+                });
+
+            modelBuilder.Entity("EPaczucha.database.PackageType", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Height")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("TypeName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Width")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PackagesTypes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

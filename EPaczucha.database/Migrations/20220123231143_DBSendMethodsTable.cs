@@ -2,7 +2,7 @@
 
 namespace EPaczucha.database.Migrations
 {
-    public partial class SendMethodsTableDB : Migration
+    public partial class DBSendMethodsTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -10,8 +10,7 @@ namespace EPaczucha.database.Migrations
                 name: "SendMethods",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     MethodName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },

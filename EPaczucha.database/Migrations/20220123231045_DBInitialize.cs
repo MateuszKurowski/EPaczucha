@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EPaczucha.database.Migrations
 {
-    public partial class InitializeDB : Migration
+    public partial class DBInitialize : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

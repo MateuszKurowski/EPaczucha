@@ -2,7 +2,7 @@
 
 namespace EPaczucha.database.Migrations
 {
-    public partial class PackagePricesTableDB : Migration
+    public partial class DBPackagePricesTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace EPaczucha.database.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Net = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    VAT = table.Column<int>(type: "int", nullable: false),
+                    VAT = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Gross = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>

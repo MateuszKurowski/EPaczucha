@@ -23,9 +23,6 @@ namespace EPaczuchaWeb.Controllers
         private readonly MapperViewModel _mapperViewModel;
         private readonly IManagerDto _managerDto;
 
-        private int _packageId;
-        private int _customerId;
-
         public PackageController(ICustomerRepository customerRepository,
                                  IPackageRepository packageRepository,
                                  IPackagePriceRepository packagePriceRepository,
@@ -50,7 +47,12 @@ namespace EPaczuchaWeb.Controllers
         [HttpGet]
         public IActionResult Index(int id, string filetString = null)
         {
-            _customerId = id;
+            if (id != 0)
+                TempData["customerId"] = id;
+            else if (TempData["customerId"] != null)
+                id = int.Parse(TempData["customerId"].ToString());
+            else
+                id = 1;
 
             var dtos = _managerDto.GetPackagesByCustomer(id, filetString);
             var viewModels = _mapperViewModel.Map(dtos);
@@ -63,29 +65,36 @@ namespace EPaczuchaWeb.Controllers
         [HttpPost]
         public IActionResult Add(PackageViewModel packageVM)
         {
-            var packageDto = _mapperViewModel.Map(packageVM);
-
-            var typePrice = _managerDto.GetPriceFromPackageType(packageDto.PackageType.Id);
-            var methodPrice = _managerDto.GetPriceFromSendMethod(packageDto.SendMethod.Id);
+            var typePrice = _managerDto.GetPriceFromPackageType(packageVM.PackageType.Id);
+            var methodPrice = _managerDto.GetPriceFromSendMethod(packageVM.SendMethod.Id);
             var net = typePrice + methodPrice;
-            //var packagePrice = new PackagePriceDto
-            //{
-            //    VAT = 23,
-            //    Net = net,
-            //    Gross = net * 23
-            //};
-            //var packagePriceId = _managerDto.AddNewPackagePrice(packagePrice);
-            //if (packagePriceId == 0)
-            //    packagePriceId = 5;
+            var packagePriceId = _managerDto.AddNewPackagePrice(new PackagePriceDto()
+            {
+                VAT = 23,
+                Net = net,
+                Gross = net * 23
+            });
+            var destinationId = _managerDto.AddNewDestination(new DestinationDto()
+            {
+                ApartmentNumber = packageVM.DestinationApartmentNumber,
+                BuildingNumber = packageVM.DestinationBuildingNumber,
+                City = packageVM.DestinationCity,
+                Street = packageVM.DestinationStreet,
+                ZipCode = packageVM.DestinationZipCode
+            });
+            packageVM.EndDate = packageVM.StartDate.AddDays(packageVM.SendMethod.Id == 1 ? 7 : packageVM.SendMethod.Id == 2 ? 4 : 2);
 
-            _managerDto.AddNewPackages(packageDto, _customerId, packageVM.SendMethod.Id, 1, packageVM.PackageType.Id);
+            var packageDto = _mapperViewModel.Map(packageVM);
+            var customerId = TempData["customerId"] == null ? _managerDto.GetCustomers(null).FirstOrDefault().Id : int.Parse(TempData["customerId"].ToString());
 
-            return RedirectToAction("Index");
+            _managerDto.AddNewPackages(packageDto, customerId, packageDto.PackageType.Id, packagePriceId, packageDto.SendMethod.Id, destinationId);
+
+            return RedirectToAction("Index", new { customerId = int.Parse(TempData["customerId"].ToString()) });
         }
 
-        public IActionResult Details(int packageId)
+        public IActionResult Details(int id)
         {
-            var dtos =_managerDto.GetPackageById(packageId);
+            var dtos =_managerDto.GetPackageById(id);
             var viewModel = _mapperViewModel.Map(dtos);
 
             ViewBag.SendMethod = viewModel.SendMethod.MethodName;
@@ -94,11 +103,10 @@ namespace EPaczuchaWeb.Controllers
             return View(viewModel);
         }
 
-        [HttpDelete]
-        public IActionResult Delete(int packageId)
+        public IActionResult Delete(int id)
         {
-            _managerDto.DeletePackage(new PackageDto { Id = packageId });
-            
+            _managerDto.DeletePackage(new PackageDto { Id = id });
+
             return RedirectToAction("Index");
         }
     }

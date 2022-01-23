@@ -2,7 +2,7 @@
 
 namespace EPaczucha.database.Migrations
 {
-    public partial class PackageTypesTableDB : Migration
+    public partial class DBPackageTypesTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -10,8 +10,7 @@ namespace EPaczucha.database.Migrations
                 name: "PackagesTypes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     TypeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Width = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Height = table.Column<string>(type: "nvarchar(max)", nullable: true),

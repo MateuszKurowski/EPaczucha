@@ -2,7 +2,7 @@
 
 namespace EPaczucha.database.Migrations
 {
-    public partial class CustomersTableDB : Migration
+    public partial class DBCustomersTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

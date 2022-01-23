@@ -9,7 +9,7 @@ namespace EPaczucha.database
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         [ForeignKey("Customer")]
-        public int UserId { get; set; }
+        public int CustomerId { get; set; }
         public virtual Customer Customer { get; set; }
         [ForeignKey("PackagePrice")]
         public int PackagePriceID { get; set; }
