@@ -25,21 +25,21 @@ namespace EPaczuchaWeb.Controllers
         public IActionResult Index()
         {
             var dtos = _managerDto.GetCustomers(null);
-            return View(_mapperViewModel.Map(dtos));
+            return View(_mapperViewModel.Map(dtos ?? new List<CustomerDto>()));
         }
 
         public IActionResult Details(int id)
         {
-            var dto =_managerDto.GetCustomers(null).FirstOrDefault(x => x.Id == id);
+            var dto =_managerDto.GetCustomers(null)?.FirstOrDefault(x => x.Id == id);
 
-            return View(_mapperViewModel.Map(dto));
+            return View(_mapperViewModel.Map(dto ?? new CustomerDto()));
         }
 
         public IActionResult Edit(int id)
         {
-            var dto = _managerDto.GetCustomers(null).FirstOrDefault(x => x.Id == id);
+            var dto = _managerDto.GetCustomers(null)?.FirstOrDefault(x => x.Id == id);
 
-            return View("Edit", _mapperViewModel.Map(dto));
+            return View("Edit", _mapperViewModel.Map(dto ?? new CustomerDto()));
         }
 
         [HttpPost]
