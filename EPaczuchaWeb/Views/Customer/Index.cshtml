@@ -44,7 +44,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                <a class="nav-link text-dark" asp-area="" asp-controller="Package" asp-action="Index" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)</a>
+                <a asp-controller="Package" asp-action="Index" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)</a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.City)

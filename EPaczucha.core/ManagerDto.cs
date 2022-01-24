@@ -154,5 +154,30 @@ namespace EPaczucha.core
             return _mappersDto.Map(entity);
         }
 
+
+        public void AddDefaultSendMethod(bool areYouSure = false)
+        {
+            if (_sendMethodRepository.GetAll() != null)
+                return;
+
+            if (areYouSure)
+            {
+                _sendMethodRepository.Create(new SendMethod { Id = 1, MethodName = "Paczka ekonomincza", Price = 8 });
+                _sendMethodRepository.Create(new SendMethod { Id = 2, MethodName = "Paczka priorytetowa", Price = 13 });
+                _sendMethodRepository.Create(new SendMethod { Id = 3, MethodName = "Kurier", Price = 18 });
+            }
+        }
+        public void AddDefaultPackageType(bool areYouSure = false)
+        {
+            if (_packageTypeRepository.GetAll() != null)
+                return;
+
+            if (areYouSure)
+            {
+                _packageTypeRepository.Create(new PackageType { Id = 1, TypeName = "Typ A", Price = 5 , Width = 10.ToString(), Height = 10.ToString()});
+                _packageTypeRepository.Create(new PackageType { Id = 2, TypeName = "Typ B", Price = 9, Width = 15.ToString(), Height = 20.ToString() });
+                _packageTypeRepository.Create(new PackageType { Id = 3, TypeName = "Typ C", Price = 14, Width = 40.ToString(), Height = 30.ToString() });
+            }
+        }
     }
 }
