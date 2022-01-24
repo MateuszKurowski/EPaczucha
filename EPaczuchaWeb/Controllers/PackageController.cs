@@ -70,9 +70,9 @@ namespace EPaczuchaWeb.Controllers
             var net = typePrice + methodPrice;
             var packagePriceId = _managerDto.AddNewPackagePrice(new PackagePriceDto()
             {
-                VAT = 23,
+                VAT = 0.23M,
                 Net = net,
-                Gross = net * 23
+                Gross = (net * 0.23M) + net
             });
             var destinationId = _managerDto.AddNewDestination(new DestinationDto()
             {
@@ -89,7 +89,7 @@ namespace EPaczuchaWeb.Controllers
 
             _managerDto.AddNewPackages(packageDto, customerId, packageDto.PackageType.Id, packagePriceId, packageDto.SendMethod.Id, destinationId);
 
-            return RedirectToAction("Index", new { customerId = int.Parse(TempData["customerId"].ToString()) });
+            return RedirectToAction("Index", new { customerId = customerId });
         }
 
         public IActionResult Details(int id)

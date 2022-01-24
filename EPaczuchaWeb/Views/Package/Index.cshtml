@@ -5,16 +5,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Lista twoich Paczek</h1>
 
 <p>
-    <a asp-action="Add">Create New</a>
+    <a asp-action="Add">Nadaj nową paczkę</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.SimpleName)
+                Twoja nazwa paczki
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.StartDate)
@@ -38,8 +38,8 @@
                 @Html.DisplayFor(modelItem => item.EndDate)
             </td>
             <td>
-                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+                @Html.ActionLink("Detale", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Usuń", "Delete", new { id=item.Id })
             </td>
         </tr>
 }

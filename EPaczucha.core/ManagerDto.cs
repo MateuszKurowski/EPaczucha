@@ -66,14 +66,14 @@ namespace EPaczucha.core
             entity.CustomerId = customerId;
             entity.PackageTypeID = packageTypeId;
             if (entity.PackageType?.Id != null)
-                entity.PackageType.Id = 0;
+                entity.PackageType = null;
             entity.PackagePriceID = packagePriceId;
             entity.SendMethodID = sendMethodId;
             if (entity.SendMethod?.Id != null)
-                entity.SendMethod.Id = 0;
+                entity.SendMethod = null;
             entity.DestinationId = destinationId;
             if (entity.Destination?.Id != null)
-                entity.Destination.Id = 0;
+                entity.Destination = null;
 
             var i = _packageRepository.Create(entity);
             _packageRepository.SaveChanges();

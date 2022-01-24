@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<h1>Detale</h1>
 
 <div>
-    <h4>CustomerViewModel</h4>
+    <h4>Dane użytkownika @Html.DisplayNameFor(model => model.FirstName)</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -74,6 +74,6 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    <a asp-action="Index">Back to List</a>
+    @Html.ActionLink("Edytuj", "Edit", new { id = Model.Id }) |
+    <a asp-action="Index">Wróć do listy użytkowników</a>
 </div>

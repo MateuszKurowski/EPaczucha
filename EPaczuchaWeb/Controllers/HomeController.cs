@@ -7,7 +7,8 @@ namespace EPaczuchaWeb.Controllers
     {
         public IActionResult Index()
         {
-            return RedirectToAction(nameof(CustomerController.Index), "Customer");
+            return View();
+            //return RedirectToAction(nameof(CustomerController.Index), "Customer");
         }
     }
 }

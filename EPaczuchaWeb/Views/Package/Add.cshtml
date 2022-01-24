@@ -5,76 +5,110 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Add</h1>
+<h1>Dodaj</h1>
 
-<h4>PackageViewModel</h4>
+<h4>Nadaj nową paczkę</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Add">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="SimpleName" class="control-label">Przyjazna nazwa paczki</label>
-                <input asp-for="SimpleName" class="form-control" />
-                <span asp-validation-for="SimpleName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="StartDate" class="control-label">Data nadania:</label>
-                <input asp-for="StartDate" class="form-control" />
-                <span asp-validation-for="StartDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-            <div>
-                <label asp-for="PackageType.Id">Typ paczki</label><br />
-                <select asp-for="PackageType.Id">
-                <option value=1 name="Typ A">Typ A</option>
-                <option value=2 name="Typ B">Typ B</option>
-                <option value=3 name="Typ C">Typ C</option>
-                </select>
-                <br />
-            </div>
-            <div>
-                <label asp-for="SendMethod.Id">Sposób wysłania paczki</label><br />
-                <select asp-for="SendMethod.Id">
-                <option value=1 name="Paczka ekonomincza">Paczka ekonomincza</option>
-                <option value=2 name="Paczka priorytetowa">Paczka priorytetowa</option>
-                <option value=3 name="Kurier">Kurier</option>
-                </select>
-                <br />
-            </div>
-            <div class="form-group">
-                <label asp-for="DestinationCity" class="control-label"></label>
-                <input asp-for="DestinationCity" class="form-control" />
-                <span asp-validation-for="DestinationCity" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DestinationStreet" class="control-label"></label>
-                <input asp-for="DestinationStreet" class="form-control" />
-                <span asp-validation-for="DestinationStreet" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DestinationBuildingNumber" class="control-label"></label>
-                <input asp-for="DestinationBuildingNumber" class="form-control" />
-                <span asp-validation-for="DestinationBuildingNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DestinationApartmentNumber" class="control-label"></label>
-                <input asp-for="DestinationApartmentNumber" class="form-control" />
-                <span asp-validation-for="DestinationApartmentNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DestinationZipCode" class="control-label"></label>
-                <input asp-for="DestinationZipCode" class="form-control" />
-                <span asp-validation-for="DestinationZipCode" class="text-danger"></span>
-            </div>
-        </form>
+<div class="row no-gutters">
+    <div class="col-12 col-sm-6 col-md-8">
+        <div class="col-md-4">
+            <form asp-action="Add">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="SimpleName" class="control-label">Przyjazna nazwa paczki</label>
+                    <input asp-for="SimpleName" class="form-control" />
+                    <span asp-validation-for="SimpleName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="StartDate" class="control-label">Data nadania:</label>
+                    <input asp-for="StartDate" class="form-control" />
+                    <span asp-validation-for="StartDate" class="text-danger"></span>
+                </div>
+                <div>
+                    <label asp-for="PackageType.Id">Typ paczki</label><br />
+                    <select asp-for="PackageType.Id">
+                    <option value=1 name="Typ A">Typ A</option>
+                    <option value=2 name="Typ B">Typ B</option>
+                    <option value=3 name="Typ C">Typ C</option>
+                    </select>
+                    <br />
+                </div>
+                <div>
+                    <label asp-for="SendMethod.Id">Sposób wysłania paczki</label><br />
+                    <select asp-for="SendMethod.Id">
+                    <option value=1 name="Paczka ekonomincza">Paczka ekonomincza</option>
+                    <option value=2 name="Paczka priorytetowa">Paczka priorytetowa</option>
+                    <option value=3 name="Kurier">Kurier</option>
+                    </select>
+                    <br />
+                </div>
+                <div class="form-group">
+                    <label asp-for="DestinationCity" class="control-label"></label>
+                    <input asp-for="DestinationCity" class="form-control" />
+                    <span asp-validation-for="DestinationCity" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DestinationStreet" class="control-label"></label>
+                    <input asp-for="DestinationStreet" class="form-control" />
+                    <span asp-validation-for="DestinationStreet" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DestinationBuildingNumber" class="control-label"></label>
+                    <input asp-for="DestinationBuildingNumber" class="form-control" />
+                    <span asp-validation-for="DestinationBuildingNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DestinationApartmentNumber" class="control-label"></label>
+                    <input asp-for="DestinationApartmentNumber" class="form-control" />
+                    <span asp-validation-for="DestinationApartmentNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DestinationZipCode" class="control-label"></label>
+                    <input asp-for="DestinationZipCode" class="form-control" />
+                    <span asp-validation-for="DestinationZipCode" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Utwórz" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-6 col-md-4">
+        <div>
+            Typy paczek:
+            <hr />
+            <ul>
+                <li>
+                    Typ A - Maksymalny rozmiar 10x10cm (5zł)
+                </li>
+                <li>
+                    Typ B - Maksymalny rozmiar 15x20cm (9zł)
+                </li>
+                <li>
+                    Typ C - Maksymalny rozmiar 40x30cm (14zł)
+                </li>
+            </ul>
+        </div>
+        <div>
+            Sposoby dostawy:
+            <hr />
+            <ul>
+                <li>
+                    Paczka ekonomincza - Szacowany czas oczekiwania to 7 dni (8zł)
+                </li>
+                <li>
+                    Paczka priorytetowa - Szacowany czas oczekiwania to 4 dni (13zł)
+                </li>
+                <li>
+                    Kurier - Szacowany czas oczekiwania to 2 dni (18zł)
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index" asp-route-id="@ViewData["customerId"]">Back to List</a>
+    <a asp-action="Index" asp-route-id="@ViewData["customerId"]">Wróc do listy paczek</a>
 </div>
 
 @section Scripts {
