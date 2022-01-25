@@ -12,49 +12,23 @@ namespace EPaczuchaWeb.Controllers
 {
     public class PackageController : Controller
     {
-        private readonly ICustomerRepository _customerRepository;
-        private readonly IPackageRepository _packageRepository;
-        private readonly IPackagePriceRepository _packagePriceRepository;
-        private readonly IPackageTypeRepository _packageTypeRepository;
-        private readonly ISendMethodRepository _sendMethodRepository;
-        private readonly IDestinationRepository _destinationRepository;
-
-        private readonly IServiceProvider _serviceProvider;
         private readonly MapperViewModel _mapperViewModel;
         private readonly IManagerDto _managerDto;
 
-        public PackageController(ICustomerRepository customerRepository,
-                                 IPackageRepository packageRepository,
-                                 IPackagePriceRepository packagePriceRepository,
-                                 IPackageTypeRepository packageTypeRepository,
-                                 ISendMethodRepository sendMethodRepository,
-                                 IDestinationRepository destinationRepository,
-                                 IServiceProvider serviceProvider,
-                                 MapperViewModel mapperViewModel,
+        public PackageController(MapperViewModel mapperViewModel,
                                  IManagerDto managerDto)
         {
-            _serviceProvider = serviceProvider;
             _mapperViewModel = mapperViewModel;
             _managerDto = managerDto;
-            _customerRepository = customerRepository;
-            _packageRepository = packageRepository;
-            _packagePriceRepository = packagePriceRepository;
-            _packageTypeRepository = packageTypeRepository;
-            _sendMethodRepository = sendMethodRepository;
-            _destinationRepository = destinationRepository;
         }
 
         [HttpGet]
-        public IActionResult Index(int id, string filetString = null)
+        public IActionResult Index(int id, string filterString = null)
         {
-            if (id != 0)
-                TempData["customerId"] = id;
-            else if (TempData["customerId"] != null)
-                id = int.Parse(TempData["customerId"].ToString());
-            else
+            if (id == 0 )
                 id = 1;
 
-            var dtos = _managerDto.GetPackagesByCustomer(id, filetString);
+            var dtos = _managerDto.GetPackagesByCustomer(id, filterString);
             var viewModels = _mapperViewModel.Map(dtos);
 
             return View(viewModels);
@@ -85,7 +59,7 @@ namespace EPaczuchaWeb.Controllers
             packageVM.EndDate = packageVM.StartDate.AddDays(packageVM.SendMethod.Id == 1 ? 7 : packageVM.SendMethod.Id == 2 ? 4 : 2);
 
             var packageDto = _mapperViewModel.Map(packageVM);
-            var customerId = TempData["customerId"] == null ? _managerDto.GetCustomers(null).FirstOrDefault().Id : int.Parse(TempData["customerId"].ToString());
+            var customerId = TempData == null ? _managerDto.GetCustomers(null).FirstOrDefault().Id : int.Parse(TempData["customerId"].ToString());
 
             _managerDto.AddNewPackages(packageDto, customerId, packageDto.PackageType.Id, packagePriceId, packageDto.SendMethod.Id, destinationId);
 

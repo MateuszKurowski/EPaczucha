@@ -1,7 +1,8 @@
-﻿
-using EPaczucha.core;
+﻿using EPaczucha.core;
 
 using EPaczuchaWeb.Controllers;
+
+using FluentAssertions;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,10 +21,11 @@ namespace EPaczucha.test
 
             var home = new HomeController(mock.Object);
 
-            var result = home.Index();
+            var resultController = home.Index();
 
-            Assert.IsType<ViewResult>(result);
-            Assert.IsAssignableFrom<IActionResult>(result);
+            resultController.Should().NotBeNull();
+            resultController.Should().BeOfType<ViewResult>();
+            resultController.Should().BeAssignableTo<IActionResult>();
 
             mock.Verify(v => v.AddDefaultPackageType(true), Times.Once());
             mock.Verify(v => v.AddDefaultSendMethod(true), Times.Once());

@@ -11,13 +11,14 @@
     <ul class="list-group">Podane warunki oceniania: 
         <li class="list-group-item">Aplikacja zawiera formularze z walidacją,</li>
         <li class="list-group-item">Dane zostały utrwalone za pomocą EF (v5.0.13) przez 6 encji, z czego każda encja posiada relacje,</li>
-        <li class="list-group-item">Wykorzystano DI, każdy Repository posiada swój interfejs po którym dziedziczy i który jest wstrzykiwany przy pomocy DI. Dodatkowo               każdy interfejs Repository dziedziczy po specjalnym interfejsie CRUD zawierającym podstawowe funkcje CRUD, oraz po klasie repository bazowym.</li>
+        <li class="list-group-item">Wykorzystano DI, każdy Repository posiada swój interfejs po którym dziedziczy i który jest wstrzykiwany przy pomocy DI. Dodatkowo każdy interfejs Repository dziedziczy po specjalnym interfejsie CRUD zawierającym podstawowe funkcje CRUD, oraz po klasie repository bazowym. Na potrzeby warunków oceniania repozytoria te zostały wstrzynknięte. Jednak wiem, że jest to nie zalecane by były tak blisko użytkownika, w tym celu stworzyłem ManageraDto</li>
         <li class="list-group-item">Autoryzacja?</li>
         <li class="list-group-item">WebAPI Rest?</li>
-        <li class="list-group-item">Testy jednostkowe?</li>
+        <li class="list-group-item">W aplikacji zawarto 30 testów jednostkowych. Sprawdzona została każda metoda w każdym kontrolerze oraz cała logika powiązania z bazą danych w ManagerzeDto</li>
     </ul>
     @*<a asp-controller="Customer" asp-action="Index" >Przejdź dalej</a>*@
     <hr />
+    <p>Do projektu testowego zostały dodane dwa Nuggety: "Moq"" - to symulacji interfejsów i managera oraz "Fluent Assertions"" w celu uproszczenia widoku oraz tworzenia testów jednostkowych.</p>
     <p>Użyty został Nugget AutoMapper w celu automatyzacji mapowania danych pomiędzy obiektami ViewModel/DataTransferObject/Entities.</p>
     <p>Wykorzystane zostały 3 kontrolery, 6 modeli oraz 8 widoków.</p>
     <p>W celach bezpieczeństwa aplikacja została podzielona na trzy warstwy: Aplikacji, Dto oraz Database.</p>

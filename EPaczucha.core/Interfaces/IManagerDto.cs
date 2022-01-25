@@ -9,7 +9,7 @@ namespace EPaczucha.core
         bool DeleteCustomer(CustomerDto customer);
         bool DeletePackage(PackageDto package);
         List<CustomerDto> GetCustomers(string filterString);
-        List<PackageDto> GetPackagesByCustomer(int customerId, string filterString);
+        List<PackageDto> GetPackagesByCustomer(int customerId, string filterString = null);
         int AddNewPackagePrice(PackagePriceDto packagePrice);
         PackageDto GetPackageById(int packageId);
         decimal GetPriceFromPackageType(int typeId);

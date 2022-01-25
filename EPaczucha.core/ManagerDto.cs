@@ -48,7 +48,7 @@ namespace EPaczucha.core
 
         public decimal GetPriceFromSendMethod(int sendMethodId) => _sendMethodRepository.GetById(sendMethodId).Price;
 
-        public List<PackageDto> GetPackagesByCustomer(int customerId, string filterString)
+        public List<PackageDto> GetPackagesByCustomer(int customerId, string filterString = null)
         {
             var packageEntities = _packageRepository.GetPackage().Where(x => x.CustomerId == customerId);
 
