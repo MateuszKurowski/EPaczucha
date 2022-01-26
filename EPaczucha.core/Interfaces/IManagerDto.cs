@@ -19,6 +19,7 @@ namespace EPaczucha.core
         bool DeleteDestination(DestinationDto destination);
         PackageTypeDto GetPackageTypeById(int packageTypeById);
         SendMethodDto GetSendMethodById(int sendMethodById);
+        int? GetCustomerIdByGuid(string guid);
 
         void AddDefaultSendMethod(bool areYouSure = false);
         void AddDefaultPackageType(bool areYouSure = false);

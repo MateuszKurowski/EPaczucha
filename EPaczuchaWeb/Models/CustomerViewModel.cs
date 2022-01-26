@@ -14,6 +14,10 @@ namespace EPaczuchaWeb.Models
         [Required]
         [StringLength(20, ErrorMessage = "Proszę podać poprawne imię!")]
         public string FirstName { get; set; }
+        [HiddenInput]
+        public string Guid { get; set; }
+        [HiddenInput]
+        public string Login { get; set; }
         [DisplayName("Nazwisko")]
         [Required]
         [StringLength(30, ErrorMessage = "Proszę podać poprawne nazwisko!")]

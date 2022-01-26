@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace EPaczucha.database
@@ -11,6 +12,7 @@ namespace EPaczucha.database
         public DbSet<SendMethod> SendMethods { get; set; }
         public DbSet<Destination> Destinations { get; set; }
         public DbSet<Package> Packages { get; set; }
+
         public EPaczuchaDbContext(DbContextOptions options) : base(options) { }
     }
 }

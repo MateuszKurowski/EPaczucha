@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EPaczucha.database.Migrations
 {
-    public partial class DBPackagesTable : Migration
+    public partial class CreatePackagesTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

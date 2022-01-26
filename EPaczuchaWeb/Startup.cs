@@ -15,10 +15,7 @@ namespace EPaczuchaWeb
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        public Startup(IConfiguration configuration) => Configuration = configuration;
 
         public IConfiguration Configuration { get; }
 
@@ -30,12 +27,13 @@ namespace EPaczuchaWeb
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<EPaczuchaDbContext>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();
 
-            services.AddTransient<ICustomerRepository, CustomerRepository>();
+            services.AddTransient<ICustomerRepository, UserRepository>();
             services.AddTransient<ISendMethodRepository, SendMethodRepository>();
             services.AddTransient<IPackagePriceRepository, PackagePriceRepository>();
             services.AddTransient<IPackageTypeRepository, PackageTypeRepository>();
@@ -46,6 +44,15 @@ namespace EPaczuchaWeb
             services.AddTransient<MapperDto>();
             services.AddTransient<MapperViewModel>();
             services.AddTransient<IManagerDto, ManagerDto>();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 4;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
@@ -71,8 +78,12 @@ namespace EPaczuchaWeb
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    name: "paczki",
+                    pattern: "paczki/lista",
+                    defaults: new { controller = "Packages", action = "Index" });
+                endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=HomePage}/{id?}");
                 endpoints.MapRazorPages();
             });
 

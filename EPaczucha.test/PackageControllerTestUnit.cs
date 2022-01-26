@@ -46,7 +46,7 @@ namespace EPaczucha.test
             var package = new PackageController(new MapperViewModel(), mock.Object);
 
             //Art
-            var resultController = package.Add();
+            var resultController = package.Add(1);
 
             //Assert
 
@@ -76,7 +76,7 @@ namespace EPaczucha.test
             var package = new PackageController(new MapperViewModel(), mock.Object);
 
             //Art
-            var resultController = package.Add(packageViewModel);
+            var resultController = package.Add(packageViewModel, 1);
 
             //Assert
 
@@ -97,7 +97,7 @@ namespace EPaczucha.test
             var package = new PackageController(new MapperViewModel(), mock.Object);
 
             //Art
-            var resultController = package.Details(1);
+            var resultController = package.Details(1, 1);
 
             //Assert
             resultController.Should().NotBeNull();
@@ -115,7 +115,7 @@ namespace EPaczucha.test
             var package = new PackageController(new MapperViewModel(), mock.Object);
 
             //Art
-            var resultController = package.Delete(It.IsAny<int>());
+            var resultController = package.Delete(1, 1);
 
             //Assert
             resultController.Should().NotBeNull();

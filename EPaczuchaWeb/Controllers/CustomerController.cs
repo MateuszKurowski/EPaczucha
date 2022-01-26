@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 using EPaczucha.core;
-using EPaczucha.database;
 
 using EPaczuchaWeb.Models;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EPaczuchaWeb.Controllers
 {
+    [Authorize]
+    [Route("kilienci")]
     public class CustomerController : Controller
     {
         private readonly MapperViewModel _mapperViewModel;
@@ -22,12 +23,18 @@ namespace EPaczuchaWeb.Controllers
             _managerDto = managerDto;
         }
 
+        [Authorize(Roles = "admin, mod")]
+        [HttpGet]
+        [Route("lista")]
         public IActionResult Index()
         {
             var dtos = _managerDto.GetCustomers(null);
             return View(_mapperViewModel.Map(dtos ?? new List<CustomerDto>()));
         }
 
+        [Authorize(Roles = "admin, mod")]
+        [HttpGet]
+        [Route("szczegoly")]
         public IActionResult Details(int id)
         {
             var dto =_managerDto.GetCustomers(null)?.FirstOrDefault(x => x.Id == id);
@@ -35,6 +42,9 @@ namespace EPaczuchaWeb.Controllers
             return View(_mapperViewModel.Map(dto ?? new CustomerDto()));
         }
 
+        [Authorize(Roles = "admin")]
+        [HttpGet]
+        [Route("edycja")]
         public IActionResult Edit(int id)
         {
             var dto = _managerDto.GetCustomers(null)?.FirstOrDefault(x => x.Id == id);
@@ -42,7 +52,9 @@ namespace EPaczuchaWeb.Controllers
             return View("Edit", _mapperViewModel.Map(dto ?? new CustomerDto()));
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
+        [Route("edycja")]
         public IActionResult Edit(CustomerViewModel customer)
         {
             var dto =_mapperViewModel.Map(customer);
@@ -52,6 +64,9 @@ namespace EPaczuchaWeb.Controllers
             return RedirectToAction("Details", customer);
         }
 
+        [Authorize(Roles = "admin")]
+        [HttpDelete("{id}")]
+        [Route("usun")]
         public IActionResult Delete(int id)
         {
             _managerDto.DeleteCustomer(new CustomerDto { Id = id });
@@ -59,11 +74,20 @@ namespace EPaczuchaWeb.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "admin")]
+        [HttpGet]
+        [Route("dodaj")]
         public IActionResult Add() => View();
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
+        [Route("dodaj")]
         public IActionResult Add(CustomerViewModel customer)
         {
+            if (customer.Login == null && customer.Email != null)
+                customer.Login = customer.Email;
+            else if (customer.Login != null && customer.Email == null)
+                customer.Email = customer.Login;
             var dto = _mapperViewModel.Map(customer);
             _managerDto.AddNewCustomer(dto);
 

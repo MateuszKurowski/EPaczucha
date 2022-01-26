@@ -1,7 +1,7 @@
 ﻿@model EPaczuchaWeb.Models.PackageViewModel
 
 @{
-    ViewData["Title"] = "Add";
+    ViewData["Title"] = "Nadaj paczkę";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -12,7 +12,7 @@
 <div class="row no-gutters">
     <div class="col-12 col-sm-6 col-md-8">
         <div class="col-md-4">
-            <form asp-action="Add">
+            <form asp-action="Add" asp-route-id="@ViewBag.CustomerId" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="SimpleName" class="control-label">Przyjazna nazwa paczki</label>
@@ -40,8 +40,10 @@
                     <option value=2 name="Paczka priorytetowa">Paczka priorytetowa</option>
                     <option value=3 name="Kurier">Kurier</option>
                     </select>
-                    <br />
                 </div>
+                <br />
+                <br />
+                <div class="form-group">Adres dostawy:</div>
                 <div class="form-group">
                     <label asp-for="DestinationCity" class="control-label"></label>
                     <input asp-for="DestinationCity" class="form-control" />
@@ -108,7 +110,7 @@
 </div>
 
 <div>
-    <a asp-action="Index" asp-route-id="@ViewData["customerId"]">Wróc do listy paczek</a>
+    <a asp-action="Index" asp-route-id="@ViewBag.CustomerId">Wróc do listy paczek</a>
 </div>
 
 @section Scripts {

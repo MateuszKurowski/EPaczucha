@@ -1,15 +1,14 @@
-﻿using System;
-using System.Linq;
-
-using EPaczucha.core;
-using EPaczucha.database;
+﻿using EPaczucha.core;
 
 using EPaczuchaWeb.Models;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EPaczuchaWeb.Controllers
 {
+    [Authorize]
+    [Route("paczki")]
     public class PackageController : Controller
     {
         private readonly MapperViewModel _mapperViewModel;
@@ -22,22 +21,30 @@ namespace EPaczuchaWeb.Controllers
             _managerDto = managerDto;
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
+        [Route("lista/{id}")]
         public IActionResult Index(int id, string filterString = null)
         {
-            if (id == 0 )
-                id = 1;
-
+            if (id == 0)
+                return BadRequest();
             var dtos = _managerDto.GetPackagesByCustomer(id, filterString);
             var viewModels = _mapperViewModel.Map(dtos);
+            ViewBag.CustomerId = id;
 
             return View(viewModels);
         }
 
-        public IActionResult Add() => View();
+        [HttpGet]
+        [Route("nowy")]
+        public IActionResult Add(int id)
+        {
+            ViewBag.CustomerId = id;
+            return View();
+        }
 
         [HttpPost]
-        public IActionResult Add(PackageViewModel packageVM)
+        [Route("nowy")]
+        public IActionResult Add(PackageViewModel packageVM, int id)
         {
             var typePrice = _managerDto.GetPriceFromPackageType(packageVM.PackageType.Id);
             var methodPrice = _managerDto.GetPriceFromSendMethod(packageVM.SendMethod.Id);
@@ -59,29 +66,32 @@ namespace EPaczuchaWeb.Controllers
             packageVM.EndDate = packageVM.StartDate.AddDays(packageVM.SendMethod.Id == 1 ? 7 : packageVM.SendMethod.Id == 2 ? 4 : 2);
 
             var packageDto = _mapperViewModel.Map(packageVM);
-            var customerId = TempData == null ? _managerDto.GetCustomers(null).FirstOrDefault().Id : int.Parse(TempData["customerId"].ToString());
+            var customerId = id;
 
             _managerDto.AddNewPackages(packageDto, customerId, packageDto.PackageType.Id, packagePriceId, packageDto.SendMethod.Id, destinationId);
 
-            return RedirectToAction("Index", new { customerId = customerId });
+            return RedirectToAction("Index", new { id });
         }
 
-        public IActionResult Details(int id)
+        [HttpGet]
+        [Route("szczegoly")]
+        public IActionResult Details(int id, int customerId)
         {
+            ViewBag.CustomerId = customerId;
+
             var dtos =_managerDto.GetPackageById(id);
             var viewModel = _mapperViewModel.Map(dtos);
 
-            ViewBag.SendMethod = viewModel.SendMethod.MethodName;
-            ViewBag.PackageType = viewModel.PackageType.TypeName;
-            ViewBag.PackagePrice = viewModel.PackagePrice.Gross;
             return View(viewModel);
         }
 
-        public IActionResult Delete(int id)
+        [HttpDelete("{id}")]
+        [Route("usun")]
+        public IActionResult Delete(int id, int customerId)
         {
             _managerDto.DeletePackage(new PackageDto { Id = id });
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = customerId });
         }
     }
 }

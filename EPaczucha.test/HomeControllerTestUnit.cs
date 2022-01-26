@@ -4,6 +4,7 @@ using EPaczuchaWeb.Controllers;
 
 using FluentAssertions;
 
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 using Moq;
@@ -18,8 +19,8 @@ namespace EPaczucha.test
         public void IndextTest()
         {
             var mock = new Mock<IManagerDto>();
-
-            var home = new HomeController(mock.Object);
+            var mock2 = new Mock<UserManager<IdentityUser>>();
+            var home = new HomeController(mock.Object, mock2.Object);
 
             var resultController = home.Index();
 

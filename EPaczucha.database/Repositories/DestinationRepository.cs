@@ -11,11 +11,7 @@ namespace EPaczucha.database
         public DestinationRepository(EPaczuchaDbContext dbContext) : base(dbContext) { }
         protected override DbSet<Destination> DbSet => _dbContext.Destinations;
 
-        public IEnumerable<Destination> GetDestinations() => DbSet/*
-            .Include(x => x.Packages).ThenInclude(x => x.SendMethod)
-            .Include(x => x.Packages).ThenInclude(x => x.PackageType)
-            .Include(x => x.Packages).ThenInclude(x => x.PackagePrice)
-            */.Select(x => x).ToList();
+        public IEnumerable<Destination> GetDestinations() => DbSet.Select(x => x).ToList();
 
         public void Update(Destination destination)
         {

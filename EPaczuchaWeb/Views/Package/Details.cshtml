@@ -1,7 +1,7 @@
 ﻿@model EPaczuchaWeb.Models.PackageViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Szczegóły paczki";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -110,5 +110,5 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Index" asp-route-id="@ViewData["customerId"]">Wróc do listy paczek</a>
+    <a asp-action="Index" asp-route-id="@ViewBag.CustomerId">Wróc do listy paczek</a>
 </div>

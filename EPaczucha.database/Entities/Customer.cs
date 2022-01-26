@@ -7,6 +7,8 @@ namespace EPaczucha.database
 {
     public class Customer : BaseEntity
     {
+        public string Guid { get; set; }
+        public string Login { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string City { get; set; }

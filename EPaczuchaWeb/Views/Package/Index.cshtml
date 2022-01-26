@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<EPaczuchaWeb.Models.PackageViewModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Lista twoich paczek";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Lista twoich Paczek</h1>
 
 <p>
-    <a asp-action="Add">Nadaj nową paczkę</a>
+    <a asp-action="Add" asp-route-id="@ViewBag.CustomerId">Nadaj nową paczkę</a>
 </p>
 <table class="table">
     <thead>
@@ -38,10 +38,16 @@
                 @Html.DisplayFor(modelItem => item.EndDate)
             </td>
             <td>
-                @Html.ActionLink("Detale", "Details", new { id=item.Id }) |
-                @Html.ActionLink("Usuń", "Delete", new { id=item.Id })
+                @Html.ActionLink("Szczegóły", "Details", new { id=item.Id, customerId = ViewBag.CustomerId }) |
+                @Html.ActionLink("Usuń", "Delete", new { id=item.Id, customerId = ViewBag.CustomerId })
             </td>
         </tr>
 }
     </tbody>
 </table>
+@if (User.IsInRole("admin") || User.IsInRole("mod"))
+{
+    <div>
+        <a asp-controller="Customer" asp-action="Index">Wróć do listy użytkowników</a>
+    </div>
+}

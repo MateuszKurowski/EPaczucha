@@ -56,7 +56,6 @@ namespace EPaczucha.core
             {
                 packageEntities = packageEntities.Where(x => x.SimpleName.Contains(filterString));
             }
-
             return _mappersDto.Map(packageEntities.ToList());
         }
 
@@ -74,6 +73,8 @@ namespace EPaczucha.core
             entity.DestinationId = destinationId;
             if (entity.Destination?.Id != null)
                 entity.Destination = null;
+            if (entity.Id != 0)
+                entity.Id = 0;
 
             var i = _packageRepository.Create(entity);
             _packageRepository.SaveChanges();
@@ -157,7 +158,7 @@ namespace EPaczucha.core
 
         public void AddDefaultSendMethod(bool areYouSure = false)
         {
-            if (_sendMethodRepository.GetAll() != null)
+            if (_sendMethodRepository.GetAll().Count != 0)
                 return;
 
             if (areYouSure)
@@ -169,7 +170,7 @@ namespace EPaczucha.core
         }
         public void AddDefaultPackageType(bool areYouSure = false)
         {
-            if (_packageTypeRepository.GetAll() != null)
+            if (_packageTypeRepository.GetAll().Count != 0)
                 return;
 
             if (areYouSure)
@@ -179,5 +180,7 @@ namespace EPaczucha.core
                 _packageTypeRepository.Create(new PackageType { Id = 3, TypeName = "Typ C", Price = 14, Width = 40.ToString(), Height = 30.ToString() });
             }
         }
+
+        public int? GetCustomerIdByGuid(string guid) => _customerRepository.GetCustomerIdByGuid(guid);
     }
 }

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Strona główna";
 }
 
 <div class="text-center">
@@ -8,13 +8,13 @@
     <p>Aplikacja wykonana została w platformie .NET 5 w środowisku Visual Studio 2022.</p>
     <p>Zajmuje się ona monitorowaniem oraz nadawaniem paczek/listów.</p>
     <hr />
-    <ul class="list-group">Podane warunki oceniania: 
+    <ul class="list-group">Spełnione warunki oceniania: 
         <li class="list-group-item">Aplikacja zawiera formularze z walidacją,</li>
         <li class="list-group-item">Dane zostały utrwalone za pomocą EF (v5.0.13) przez 6 encji, z czego każda encja posiada relacje,</li>
         <li class="list-group-item">Wykorzystano DI, każdy Repository posiada swój interfejs po którym dziedziczy i który jest wstrzykiwany przy pomocy DI. Dodatkowo każdy interfejs Repository dziedziczy po specjalnym interfejsie CRUD zawierającym podstawowe funkcje CRUD, oraz po klasie repository bazowym. Na potrzeby warunków oceniania repozytoria te zostały wstrzynknięte. Jednak wiem, że jest to nie zalecane by były tak blisko użytkownika, w tym celu stworzyłem ManageraDto</li>
-        <li class="list-group-item">Autoryzacja?</li>
+        <li class="list-group-item">W aplikacji została wprowadzona podstawowa autoryzacja z podziałem na role, użytkownik niezalogowany ma dostęp tylko do tej strony, klient do swoich paczek a administrator do listy klientów i ich paczek. Dodatkowo na potrzeby uproszczenia sprawdzenia funkcjonalności zdjąłem wszystkie domyślne wymagania Microsoftu odnośnie haseł (minimalna ilość znaków hasła to 6),</li>
         <li class="list-group-item">WebAPI Rest?</li>
-        <li class="list-group-item">W aplikacji zawarto 30 testów jednostkowych. Sprawdzona została każda metoda w każdym kontrolerze oraz cała logika powiązania z bazą danych w ManagerzeDto</li>
+        <li class="list-group-item">W aplikacji zawarto 30 testów jednostkowych. Sprawdzona została każda metoda w każdym kontrolerze oraz cała logika wykorzystana w aplikacji zawarta w ManagerzeDto</li>
     </ul>
     @*<a asp-controller="Customer" asp-action="Index" >Przejdź dalej</a>*@
     <hr />
@@ -24,6 +24,12 @@
     <p>W celach bezpieczeństwa aplikacja została podzielona na trzy warstwy: Aplikacji, Dto oraz Database.</p>
     <p>Aplikacja obsługuje połączenie z bazą danych SQL. Jest ona samowystarczalna i włączenie aplikacji stworzy wszystkie potrzebne obiekty.</p>
     <p>Baza danych została użyta z IdentityDbContext jednak ostatecznie zrezygnowałem z rozwiązania gotowych tabel EF. W warstwie bazy zostały wdrożone migracje.</p>
+    <hr />
+    <p>Dostępnych jest 3 użytkowników:.</p>
+        <p>Administartor - Posiada on wszystkie widoki i prawa<br />Login: admin@admin.pl <br />Hasło: 123456</p><br />
+        
+        <p>2. Moderator - Posiada on wgląd w wszystkich użytkowników jednak nie może dodawać, usuwać ani edytować użytkowników aplikacji<br />Login: mod@mod.pl <br />Hasło: 654321</p><br />
+        <p>Klient - Zwykły przykład klienta z swoimi paczkami<br />Login: klient@gmail.com <br />Hasło: 111222</p><br />
     
-    <a asp-controller="Customer" asp-action="Index" >Przejdź dalej</a>
+    <a asp-controller="Home" asp-action="LoginManager" >Przejdź dalej</a>
 </div>

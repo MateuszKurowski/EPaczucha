@@ -4,6 +4,7 @@ namespace EPaczucha.database
 {
     public interface ICustomerRepository : ICrudRepository<Customer>, IRepostiory<Customer>
     {
-        public IEnumerable<Customer> GetCustomers();
+        IEnumerable<Customer> GetCustomers();
+        int? GetCustomerIdByGuid(string guid);
     }
 }

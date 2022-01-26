@@ -31,9 +31,7 @@ namespace EPaczucha.database
         {
             var list = new List<Entity>();
 
-            var entities = DbSet;
-
-            foreach (var entity in entities)
+            foreach (var entity in DbSet)
                 list.Add(entity);
 
             return list;

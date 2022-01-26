@@ -2,7 +2,7 @@
 
 namespace EPaczucha.database.Migrations
 {
-    public partial class DBPackagePricesTable : Migration
+    public partial class CreatePackagePricesTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

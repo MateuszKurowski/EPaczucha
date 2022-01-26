@@ -1,20 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace EPaczucha.database
 {
-    public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
+    public class UserRepository : BaseRepository<Customer>, ICustomerRepository
     {
-        public CustomerRepository(EPaczuchaDbContext dbContext) : base(dbContext) { }
+        public UserRepository(EPaczuchaDbContext dbContext) : base(dbContext) { }
         protected override DbSet<Customer> DbSet => _dbContext.Customers;
 
-        public IEnumerable<Customer> GetCustomers() => DbSet/*
-            .Include(x => x.Packages).ThenInclude(x => x.SendMethod)
-            .Include(x => x.Packages).ThenInclude(x => x.PackageType)
-            .Include(x => x.Packages).ThenInclude(x => x.PackagePrice)
-            */.Select(x => x).ToList();
+        public IEnumerable<Customer> GetCustomers() => DbSet.Select(x => x).ToList();
 
         public void Update(Customer customer)
         {
@@ -37,5 +34,7 @@ namespace EPaczucha.database
                 SaveChanges();
             }
         }
+
+        public int? GetCustomerIdByGuid(string guid) => DbSet.Where(x => x.Guid == guid)?.FirstOrDefault()?.Id;
     }
 }
