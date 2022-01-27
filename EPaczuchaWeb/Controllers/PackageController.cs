@@ -25,7 +25,7 @@ namespace EPaczuchaWeb.Controllers
 
         [HttpGet("{id}")]
         [Route("lista/{id}")]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [NoId]
         public IActionResult Index(int id, string filterString = null)
         {
