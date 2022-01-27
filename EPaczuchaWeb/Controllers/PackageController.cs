@@ -34,11 +34,6 @@ namespace EPaczuchaWeb.Controllers
             var dtos = _managerDto.GetPackagesByCustomer(id, filterString);
             var viewModels = _mapperViewModel.Map(dtos);
             ViewBag.CustomerId = id;
-            if (viewModels.Count == 0)
-            {
-                Response.StatusCode = 204;
-                return NotFound();
-            }
 
             Response.StatusCode = 200;
             return View(viewModels);
@@ -111,7 +106,6 @@ namespace EPaczuchaWeb.Controllers
         [HttpDelete("{id}")]
         [Route("usun")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [NoId]
         public IActionResult Delete(int id, int customerId)
         {
             var deleted = _managerDto.DeletePackage(new PackageDto { Id = id });

@@ -33,7 +33,10 @@ namespace EPaczuchaWeb.Controllers
         public IActionResult LoginManager()
         {
             var userGuid = _userManager.GetUserId(HttpContext.User);
+            var userName = _userManager.GetUserName(HttpContext.User);
             var userId = _managerDto.GetCustomerIdByGuid(userGuid);
+            if ((userId == null || userId == 0) && (userName != "admin@admin.pl" && userName != "mod@mod.pl"))
+                userId = _managerDto.AddNewCustomer(new CustomerDto() { Guid = userGuid, Login = userName });
             if(User.IsInRole("admin"))
             {
                 return RedirectToAction("Index", "Customer");

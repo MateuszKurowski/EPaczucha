@@ -68,7 +68,8 @@ namespace EPaczuchaWeb.Controllers
                 Response.StatusCode = 304;
                 return NotFound();
             }
-
+            else
+                ViewBag.customerId = id;
             return View("Edit", _mapperViewModel.Map(dto ?? new CustomerDto()));
         }
 
@@ -76,13 +77,14 @@ namespace EPaczuchaWeb.Controllers
         [HttpPost]
         [Route("edycja")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult Edit(CustomerViewModel customer)
+        public IActionResult Edit(CustomerViewModel customer, int id)
         {
+            customer.Id = id;
             var dto =_mapperViewModel.Map(customer);
 
             _managerDto.EditCustomer(dto);
 
-            return RedirectToAction("Details", customer);
+            return RedirectToAction("Details", new { id = customer.Id});
         }
 
         [Authorize(Roles = "admin")]

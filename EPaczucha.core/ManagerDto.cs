@@ -93,15 +93,13 @@ namespace EPaczucha.core
         public bool DeleteCustomer(CustomerDto customer)
         {
             var entity = _mappersDto.Map(customer);
-            _customerRepository.Delete(entity);
-            return _customerRepository.SaveChanges();
+            return _customerRepository.Delete(entity);
         }
 
         public bool DeletePackage(PackageDto package)
         {
             var entity = _mappersDto.Map(package);
-            _packageRepository.Delete(entity);
-            return _packageRepository.SaveChanges();
+            return _packageRepository.Delete(entity);
         }
 
         public PackageDto GetPackageById(int packageId)
@@ -139,8 +137,7 @@ namespace EPaczucha.core
         public bool DeleteDestination(DestinationDto destination)
         {
             var entity = _mappersDto.Map(destination);
-            _destinationRepository.Delete(entity);
-            return _destinationRepository.SaveChanges();
+            return _destinationRepository.Delete(entity);
         }
 
         public PackageTypeDto GetPackageTypeById(int packageTypeById)
