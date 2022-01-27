@@ -24,7 +24,8 @@ namespace EPaczuchaWeb
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<EPaczuchaDbContext>(options => options
-            .UseSqlServer("Server=localhost\\SQLEXPRESS;Database=EPaczuchaDatabase;Trusted_Connection=True;"));
+            //.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=EPaczuchaDatabase;Trusted_Connection=True;"));
+            .UseSqlServer("Data Source=tcp:epaczuchawebdb.database.windows.net,1433;Initial Catalog=EPaczuchaWeb_db;User Id=KaMeR@epaczuchawebdb;Password=Mateuszekk1!"));
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
