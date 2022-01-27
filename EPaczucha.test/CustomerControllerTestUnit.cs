@@ -69,27 +69,27 @@ namespace EPaczucha.test
             mock.Verify(v => v.GetCustomers(null), Times.Once());
         }
 
-        [Fact]
-        public void EditTest()
-        {
-            //Arrange
-            var list = new List<CustomerDto>();
-            var customerDto = new CustomerDto() { Id = 1, };
-            list.Add(customerDto);
-            var mock = new Mock<IManagerDto>();
-            mock.Setup(m => m.GetCustomers(null)).Returns(list);
-            var customer = new CustomerController(new MapperViewModel(), mock.Object);
+        //[Fact]
+        //public void EditTest()
+        //{
+        //    //Arrange
+        //    var list = new List<CustomerDto>();
+        //    var customerDto = new CustomerDto() { Id = 1, };
+        //    list.Add(customerDto);
+        //    var mock = new Mock<IManagerDto>();
+        //    mock.Setup(m => m.GetCustomers(null)).Returns(list);
+        //    var customer = new CustomerController(new MapperViewModel(), mock.Object);
 
-            //Art
-            var resultController = customer.Edit(1);
+        //    //Art
+        //    var resultController = customer.Edit(1);
 
-            //Assert
-            resultController.Should().NotBeNull();
-            resultController.Should().BeOfType<ViewResult>();
-            resultController.Should().BeAssignableTo<IActionResult>();
+        //    //Assert
+        //    resultController.Should().NotBeNull();
+        //    resultController.Should().BeOfType<ViewResult>();
+        //    resultController.Should().BeAssignableTo<IActionResult>();
 
-            mock.Verify(v => v.GetCustomers(null), Times.Once());
-        }
+        //    mock.Verify(v => v.GetCustomers(null), Times.Once());
+        //}
 
         [Fact]
         public void EditPostTest()
