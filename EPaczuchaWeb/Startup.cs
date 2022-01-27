@@ -3,6 +3,8 @@ using System;
 using EPaczucha.core;
 using EPaczucha.database;
 
+using EPaczuchaWeb.Authorization;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -53,6 +55,12 @@ namespace EPaczuchaWeb
                 options.Password.RequireUppercase = false;
                 options.Password.RequireLowercase = false;
             });
+
+            //services.AddSingleton<BasicAuthorizationFilter>();
+            //services.AddMvc().AddMvcOptions(options =>
+            //{
+            //    options.Filters.AddService<BasicAuthorizationFilter>();
+            //});
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)

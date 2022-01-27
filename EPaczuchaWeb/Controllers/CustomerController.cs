@@ -3,6 +3,7 @@ using System.Linq;
 
 using EPaczucha.core;
 
+using EPaczuchaWeb.Exceptions;
 using EPaczuchaWeb.Models;
 
 using Microsoft.AspNetCore.Authorization;
@@ -30,6 +31,12 @@ namespace EPaczuchaWeb.Controllers
         public IActionResult Index()
         {
             var dtos = _managerDto.GetCustomers(null);
+            if (dtos.Count == 0)
+            {
+                Response.StatusCode = 204;
+                return NotFound();
+            }
+            Response.StatusCode = 200;
             return View(_mapperViewModel.Map(dtos ?? new List<CustomerDto>()));
         }
 
@@ -40,7 +47,11 @@ namespace EPaczuchaWeb.Controllers
         public IActionResult Details(int id)
         {
             var dto =_managerDto.GetCustomers(null)?.FirstOrDefault(x => x.Id == id);
-
+            if (dto == null)
+            {
+                Response.StatusCode = 204;
+                return NotFound();
+            }
             return View(_mapperViewModel.Map(dto ?? new CustomerDto()));
         }
 
@@ -48,9 +59,15 @@ namespace EPaczuchaWeb.Controllers
         [HttpGet]
         [Route("edycja")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [NoId]
         public IActionResult Edit(int id)
         {
             var dto = _managerDto.GetCustomers(null)?.FirstOrDefault(x => x.Id == id);
+            if (dto == null)
+            {
+                Response.StatusCode = 304;
+                return NotFound();
+            }
 
             return View("Edit", _mapperViewModel.Map(dto ?? new CustomerDto()));
         }
@@ -72,10 +89,16 @@ namespace EPaczuchaWeb.Controllers
         [HttpDelete("{id}")]
         [Route("usun")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [NoId]
         public IActionResult Delete(int id)
         {
-            _managerDto.DeleteCustomer(new CustomerDto { Id = id });
-
+            var deleted = _managerDto.DeleteCustomer(new CustomerDto { Id = id });
+            if (!deleted)
+            {
+                Response.StatusCode = 204;
+                return NotFound();
+            }
+            Response.StatusCode = 200;
             return RedirectToAction("Index");
         }
 
@@ -95,8 +118,14 @@ namespace EPaczuchaWeb.Controllers
             else if (customer.Login != null && customer.Email == null)
                 customer.Email = customer.Login;
             var dto = _mapperViewModel.Map(customer);
-            _managerDto.AddNewCustomer(dto);
+            
+            if (_managerDto.AddNewCustomer(dto) == 0)
+            {
+                Response.StatusCode = 405;
+                return NotFound();
+            }
 
+            Response.StatusCode = 201;
             return RedirectToAction("Index");
         }
     }

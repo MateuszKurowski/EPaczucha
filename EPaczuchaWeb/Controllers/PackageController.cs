@@ -1,5 +1,6 @@
 ﻿using EPaczucha.core;
 
+using EPaczuchaWeb.Exceptions;
 using EPaczuchaWeb.Models;
 
 using Microsoft.AspNetCore.Authorization;
@@ -24,7 +25,8 @@ namespace EPaczuchaWeb.Controllers
 
         [HttpGet("{id}")]
         [Route("lista/{id}")]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)
+        [NoId]
         public IActionResult Index(int id, string filterString = null)
         {
             if (id == 0)
@@ -32,16 +34,25 @@ namespace EPaczuchaWeb.Controllers
             var dtos = _managerDto.GetPackagesByCustomer(id, filterString);
             var viewModels = _mapperViewModel.Map(dtos);
             ViewBag.CustomerId = id;
+            if (viewModels.Count == 0)
+            {
+                Response.StatusCode = 204;
+                return NotFound();
+            }
 
+            Response.StatusCode = 200;
             return View(viewModels);
         }
 
         [HttpGet]
         [Route("nowy")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [NoId]
         public IActionResult Add(int id)
         {
             ViewBag.CustomerId = id;
+
+            Response.StatusCode = 200;
             return View();
         }
 
@@ -80,23 +91,37 @@ namespace EPaczuchaWeb.Controllers
         [HttpGet]
         [Route("szczegoly")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [NoId]
         public IActionResult Details(int id, int customerId)
         {
             ViewBag.CustomerId = customerId;
 
             var dtos =_managerDto.GetPackageById(id);
             var viewModel = _mapperViewModel.Map(dtos);
+            if (viewModel == null)
+            {
+                Response.StatusCode = 404;
+                return NotFound();
+            }
 
+            Response.StatusCode = 200;
             return View(viewModel);
         }
 
         [HttpDelete("{id}")]
         [Route("usun")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [NoId]
         public IActionResult Delete(int id, int customerId)
         {
-            _managerDto.DeletePackage(new PackageDto { Id = id });
+            var deleted = _managerDto.DeletePackage(new PackageDto { Id = id });
+            if(!deleted)
+            {
+                Response.StatusCode = 405;
+                return NotFound();
+            }
 
+            Response.StatusCode = 200;
             return RedirectToAction("Index", new { id = customerId });
         }
     }
