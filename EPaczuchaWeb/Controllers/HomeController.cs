@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EPaczuchaWeb.Controllers
 {
-
     public class HomeController : Controller
     {
         private readonly IManagerDto _managerDto;

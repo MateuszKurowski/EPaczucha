@@ -3,6 +3,7 @@
 using EPaczuchaWeb.Models;
 
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EPaczuchaWeb.Controllers
@@ -23,6 +24,7 @@ namespace EPaczuchaWeb.Controllers
 
         [HttpGet("{id}")]
         [Route("lista/{id}")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Index(int id, string filterString = null)
         {
             if (id == 0)
@@ -36,6 +38,7 @@ namespace EPaczuchaWeb.Controllers
 
         [HttpGet]
         [Route("nowy")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Add(int id)
         {
             ViewBag.CustomerId = id;
@@ -44,6 +47,7 @@ namespace EPaczuchaWeb.Controllers
 
         [HttpPost]
         [Route("nowy")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Add(PackageViewModel packageVM, int id)
         {
             var typePrice = _managerDto.GetPriceFromPackageType(packageVM.PackageType.Id);
@@ -75,6 +79,7 @@ namespace EPaczuchaWeb.Controllers
 
         [HttpGet]
         [Route("szczegoly")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Details(int id, int customerId)
         {
             ViewBag.CustomerId = customerId;
@@ -87,6 +92,7 @@ namespace EPaczuchaWeb.Controllers
 
         [HttpDelete("{id}")]
         [Route("usun")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Delete(int id, int customerId)
         {
             _managerDto.DeletePackage(new PackageDto { Id = id });

@@ -35,6 +35,7 @@ namespace EPaczuchaWeb.Models
         [Range(1, 3000, ErrorMessage = "Proszę podać poprawny numer budynku!")]
         public string BuildingNumber { get; set; }
         [DisplayName("Numer mieszkania")]
+        [DisplayFormat(ConvertEmptyStringToNull = true, NullDisplayText = "")]
         [Range(1, 300, ErrorMessage = "Proszę podać poprawny numer mieszkania!")]
         public string ApartmentNumber { get; set; }
         [DisplayName("Kod pocztowy")]
@@ -42,6 +43,7 @@ namespace EPaczuchaWeb.Models
         [RegularExpression("[0-9]{2}-[0-9]{3}", ErrorMessage = "Proszę podać poprawny kod pocztowy!")]
         public string ZipCode { get; set; }
         [DisplayName("Adres email")]
+        [DisplayFormat(ConvertEmptyStringToNull = true, NullDisplayText = "")]
         public string Email { get; set; }
         [DisplayName("Numer telefonu")]
         [Required]

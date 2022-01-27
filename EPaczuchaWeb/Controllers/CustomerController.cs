@@ -6,6 +6,7 @@ using EPaczucha.core;
 using EPaczuchaWeb.Models;
 
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EPaczuchaWeb.Controllers
@@ -35,6 +36,7 @@ namespace EPaczuchaWeb.Controllers
         [Authorize(Roles = "admin, mod")]
         [HttpGet]
         [Route("szczegoly")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Details(int id)
         {
             var dto =_managerDto.GetCustomers(null)?.FirstOrDefault(x => x.Id == id);
@@ -45,6 +47,7 @@ namespace EPaczuchaWeb.Controllers
         [Authorize(Roles = "admin")]
         [HttpGet]
         [Route("edycja")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Edit(int id)
         {
             var dto = _managerDto.GetCustomers(null)?.FirstOrDefault(x => x.Id == id);
@@ -55,6 +58,7 @@ namespace EPaczuchaWeb.Controllers
         [Authorize(Roles = "admin")]
         [HttpPost]
         [Route("edycja")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Edit(CustomerViewModel customer)
         {
             var dto =_mapperViewModel.Map(customer);
@@ -67,6 +71,7 @@ namespace EPaczuchaWeb.Controllers
         [Authorize(Roles = "admin")]
         [HttpDelete("{id}")]
         [Route("usun")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Delete(int id)
         {
             _managerDto.DeleteCustomer(new CustomerDto { Id = id });
@@ -82,6 +87,7 @@ namespace EPaczuchaWeb.Controllers
         [Authorize(Roles = "admin")]
         [HttpPost]
         [Route("dodaj")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Add(CustomerViewModel customer)
         {
             if (customer.Login == null && customer.Email != null)
