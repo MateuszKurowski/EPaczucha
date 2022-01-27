@@ -31,4 +31,9 @@
         <p>Klient - Zwykły przykład klienta z swoimi paczkami<br />Login: klient@gmail.com <br />Hasło: 111222</p><br />
     
     <a asp-controller="Home" asp-action="LoginManager" >Przejdź dalej</a>
+    @if (User.IsInRole("admin"))
+    {
+        <br /><br />
+        <p style="font-size:small">W przypadku braku klientów w aplikacji <a asp-controller="Customer" asp-action="Add">dodaj</a> administratorze</p>
+    }
 </div>
