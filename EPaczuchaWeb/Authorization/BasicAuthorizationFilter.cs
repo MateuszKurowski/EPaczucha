@@ -12,10 +12,10 @@ namespace EPaczuchaWeb.Authorization
 {
     public class BasicAuthorizationFilter : IAuthorizationFilter
     {
-        private const string USERNAME = "admin@admin.pl";
-        private const string PASSWORD = "123456";
-        private const string Realm = "App Realm";
-        
+        private const string _username = "admin@admin.pl";
+        private const string _password = "123456";
+        private const string _realm = "App Realm";
+
         public void OnAuthorization(AuthorizationFilterContext context)
         {
             if (context.Filters.OfType<DisableBacisAuthentication>().Any())
@@ -24,16 +24,16 @@ namespace EPaczuchaWeb.Authorization
             if (!context.HttpContext.Request.Headers.Keys.Contains(HeaderNames.Authorization))
             {
                 context.HttpContext.Response.Headers.Add("WWW-Autheticate",
-                    string.Format("Basic realm =\"{0}\"", Realm));
+                    string.Format("Basic realm =\"{0}\"", _realm));
                 context.Result = new UnauthorizedResult();
                 return;
             }
             string authenticationToken = context.HttpContext.Request.Headers[HeaderNames.Authorization];
             authenticationToken = authenticationToken.Split(" ")[1].Trim();
-            string decodedAuthenticationToken = Encoding.UTF8.GetString(Convert.FromBase64String(authenticationToken));
-            string[] usernamePasswordArray = decodedAuthenticationToken.Split(':');
-            string username = usernamePasswordArray[0];
-            string password = usernamePasswordArray[1];
+            var decodedAuthenticationToken = Encoding.UTF8.GetString(Convert.FromBase64String(authenticationToken));
+            var usernamePasswordArray = decodedAuthenticationToken.Split(':');
+            var username = usernamePasswordArray[0];
+            var password = usernamePasswordArray[1];
             if (Validate(username, password))
             {
                 var identity = new GenericIdentity(username);
@@ -44,12 +44,10 @@ namespace EPaczuchaWeb.Authorization
                 context.Result = new UnauthorizedResult();
         }
 
-        public static bool Validate(string username, string password)
-        {
-            return USERNAME.Equals(username) && PASSWORD.Equals(password);
-        }
+        public static bool Validate(string username, string password) => _username.Equals(username) && _password.Equals(password);
     }
 
+    [AttributeUsage(AttributeTargets.All)]
     public class DisableBacisAuthentication : Attribute, IFilterMetadata
     {
     }

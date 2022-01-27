@@ -7,7 +7,6 @@ namespace EPaczuchaWeb.Validator
     {
         public static ValidationResult ValidateEndTimeRange(DateTime endTime)
         {
-
             if (endTime < DateTime.Now || endTime > DateTime.Now.AddDays(1))
             {
                 return new ValidationResult("Nie można przesłać .");

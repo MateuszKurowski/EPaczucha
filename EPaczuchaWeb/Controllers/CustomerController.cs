@@ -120,7 +120,7 @@ namespace EPaczuchaWeb.Controllers
             else if (customer.Login != null && customer.Email == null)
                 customer.Email = customer.Login;
             var dto = _mapperViewModel.Map(customer);
-            
+
             if (_managerDto.AddNewCustomer(dto) == 0)
             {
                 Response.StatusCode = 405;

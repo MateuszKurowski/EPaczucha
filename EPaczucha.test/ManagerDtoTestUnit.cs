@@ -14,14 +14,13 @@ namespace EPaczucha.test
 {
     public class ManagerDtoTestUnit
     {
-        private static readonly Mock<ICustomerRepository> _mock = new Mock<ICustomerRepository>();
-        private static readonly Mock<IPackageRepository> _mock2 = new Mock<IPackageRepository>();
-        private static readonly Mock<IPackageTypeRepository> _mock3 = new Mock<IPackageTypeRepository>();
-        private static readonly Mock<IPackagePriceRepository> _mock4 = new Mock<IPackagePriceRepository>();
-        private static readonly Mock<ISendMethodRepository> _mock5 = new Mock<ISendMethodRepository>();
-        private static readonly Mock<IDestinationRepository> _mock6 = new Mock<IDestinationRepository>();
-        private static readonly Mock<IManagerDto> _Imanager = new Mock<IManagerDto>();
-        private static readonly ManagerDto manager = new ManagerDto(_mock.Object,
+        private static readonly Mock<ICustomerRepository> _mock = new();
+        private static readonly Mock<IPackageRepository> _mock2 = new();
+        private static readonly Mock<IPackageTypeRepository> _mock3 = new();
+        private static readonly Mock<IPackagePriceRepository> _mock4 = new();
+        private static readonly Mock<ISendMethodRepository> _mock5 = new();
+        private static readonly Mock<IDestinationRepository> _mock6 = new();
+        private static readonly ManagerDto _manager = new(_mock.Object,
                           _mock2.Object,
                           _mock3.Object,
                           _mock4.Object,
@@ -34,7 +33,7 @@ namespace EPaczucha.test
         {
             //Arrange
             var newList = new List<Customer>();
-            Customer customer = new Customer()
+            var customer = new Customer()
             {
                 Id = 1,
                 FirstName = "Jan",
@@ -49,7 +48,7 @@ namespace EPaczucha.test
             _mock.Setup(m => m.GetCustomers()).Returns(newList);
 
             //Art
-            var resultController = manager.GetCustomers(null);
+            var resultController = _manager.GetCustomers(null);
 
             //Assert
             resultController.Should().NotBeNull();
@@ -115,7 +114,7 @@ namespace EPaczucha.test
         {
             //Arrange
             var newList = new List<Package>();
-            Package package = new Package()
+            var package = new Package()
             {
                 Id = 1,
                 CustomerId = 1
@@ -141,7 +140,7 @@ namespace EPaczucha.test
         public void AddNewPackagesTest()
         {
             //Arrange
-            Package package = new Package()
+            var package = new Package()
             {
                 Id = 1,
                 CustomerId = 1,
@@ -150,7 +149,7 @@ namespace EPaczucha.test
                 PackageTypeID = 1,
                 SendMethodID = 1
             };
-            PackageDto packageDto = new PackageDto()
+            var packageDto = new PackageDto()
             {
                 Id = 1,
                 CustomerId = 1,
@@ -175,7 +174,7 @@ namespace EPaczucha.test
         public void AddNewCustomerTest()
         {
             //Arrange
-            CustomerDto customer = new CustomerDto()
+            var customer = new CustomerDto()
             {
                 Id = 1,
                 FirstName = "Jan",
@@ -205,7 +204,7 @@ namespace EPaczucha.test
         public void DeteteCustomerTest()
         {
             //Arrange
-            CustomerDto customerDto = new CustomerDto()
+            var customerDto = new CustomerDto()
             {
                 Id = 1,
                 FirstName = "Jan",
@@ -236,7 +235,7 @@ namespace EPaczucha.test
         public void DeletePackagesTest()
         {
             //Arrange
-            PackageDto packageDto = new PackageDto()
+            var packageDto = new PackageDto()
             {
                 Id = 1,
             };
@@ -260,13 +259,12 @@ namespace EPaczucha.test
         public void GetPackageByIdTest()
         {
             //Arrange
-            Package package = new Package()
+            var package = new Package()
             {
                 Id = 1,
                 CustomerId = 1,
                 Destination = new Destination { Id = 1},
                 SendMethod = new SendMethod { Id = 1},
-
             };
             _mock2.Setup(m => m.GetById(1)).Returns(package);
             _mock3.Setup(m => m.GetById(1)).Returns(It.IsAny<PackageType>());
@@ -293,11 +291,11 @@ namespace EPaczucha.test
         public void AddNewPackagePriceTest()
         {
             //Arrange
-            PackagePriceDto packagePriceDto = new PackagePriceDto()
+            var packagePriceDto = new PackagePriceDto()
             {
                 Id = 1,
             };
-            PackagePrice packagePrice = new PackagePrice()
+            var packagePrice = new PackagePrice()
             {
                 Id = 1,
             };
@@ -321,7 +319,7 @@ namespace EPaczucha.test
         public void EditCustomerTest()
         {
             //Arrange
-            Customer customer = new Customer()
+            var customer = new Customer()
             {
                 Id = 1,
                 FirstName = "Jan",
@@ -332,7 +330,7 @@ namespace EPaczucha.test
                 ZipCode = "30-400",
                 PhoneNumber = "123456789"
             };
-            CustomerDto customerDto = new CustomerDto()
+            var customerDto = new CustomerDto()
             {
                 Id = 1,
                 FirstName = "Jan",
@@ -363,11 +361,11 @@ namespace EPaczucha.test
         public void AddNewDestinationTest()
         {
             //Arrange
-            DestinationDto destinationDto = new DestinationDto()
+            var destinationDto = new DestinationDto()
             {
                 Id = 1,
             };
-            Destination destination = new Destination()
+            var destination = new Destination()
             {
                 Id = 1,
             };
@@ -391,11 +389,11 @@ namespace EPaczucha.test
         public void DeleteDestinationTest()
         {
             //Arrange
-            DestinationDto destinationDto = new DestinationDto()
+            var destinationDto = new DestinationDto()
             {
                 Id = 1,
             };
-            Destination destination = new Destination()
+            var destination = new Destination()
             {
                 Id = 1,
             };
@@ -419,11 +417,11 @@ namespace EPaczucha.test
         public void GetPackageTypeByIdTest()
         {
             //Arrange
-            PackageTypeDto packageTypeDto = new PackageTypeDto()
+            var packageTypeDto = new PackageTypeDto()
             {
                 Id = 1,
             };
-            PackageType packageType = new PackageType()
+            var packageType = new PackageType()
             {
                 Id = 1,
             };
@@ -447,11 +445,11 @@ namespace EPaczucha.test
         public void GetSendMethodByIdTest()
         {
             //Arrange
-            SendMethodDto sendMethodDto = new SendMethodDto()
+            var sendMethodDto = new SendMethodDto()
             {
                 Id = 1,
             };
-            SendMethod sendMethod = new SendMethod()
+            var sendMethod = new SendMethod()
             {
                 Id = 1,
             };
@@ -475,7 +473,7 @@ namespace EPaczucha.test
         public void AddDefaultSendMethod()
         {
             //Arrange
-            _mock5.Setup(m => m.GetAll());
+            _mock5.Setup(m => m.GetAll()).Returns(new List<SendMethod>());
             var manager = new ManagerDto(_mock.Object,
                           _mock2.Object,
                           _mock3.Object,
@@ -495,7 +493,7 @@ namespace EPaczucha.test
         public void AddDefaultPackageTypeTest()
         {
             //Arrange
-            _mock3.Setup(m => m.GetAll());
+            _mock3.Setup(m => m.GetAll()).Returns(new List<PackageType>());
             var manager = new ManagerDto(_mock.Object,
                           _mock2.Object,
                           _mock3.Object,

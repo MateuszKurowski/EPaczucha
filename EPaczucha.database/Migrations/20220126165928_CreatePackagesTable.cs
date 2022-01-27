@@ -83,10 +83,7 @@ namespace EPaczucha.database.Migrations
                 column: "SendMethodID");
         }
 
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
+        protected override void Down(MigrationBuilder migrationBuilder) => migrationBuilder.DropTable(
                 name: "Packages");
-        }
     }
 }

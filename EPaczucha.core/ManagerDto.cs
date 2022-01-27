@@ -84,7 +84,7 @@ namespace EPaczucha.core
         public int AddNewCustomer(CustomerDto customer)
         {
             var entity = _mappersDto.Map(customer);
-            
+
             var i = _customerRepository.Create(entity);
             _customerRepository.SaveChanges();
             return i;
@@ -151,7 +151,6 @@ namespace EPaczucha.core
             var entity = _sendMethodRepository.GetById(sendMethodById);
             return _mappersDto.Map(entity);
         }
-
 
         public void AddDefaultSendMethod(bool areYouSure = false)
         {

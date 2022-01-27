@@ -26,7 +26,6 @@ namespace EPaczuchaWeb.Models
         public PackageTypeViewModel PackageType { get; set; }
         public SendMethodViewModel SendMethod { get; set; }
 
-
         [DisplayName("Miasto")]
         [Required]
         [MinLength(length: 2, ErrorMessage = "Proszę podać poprawną nazwę miasta!")]

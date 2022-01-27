@@ -12,7 +12,7 @@ namespace EPaczuchaWeb.Exceptions
         {
         }
 
-        public NoId(string? message) : base(message)
+        public NoId(string message) : base(message)
         {
         }
 
@@ -27,8 +27,10 @@ namespace EPaczuchaWeb.Exceptions
         {
             if (context.Exception is NoId)
             {
-                var body = new Dictionary<string, Object>();
-                body["error"] = context.Exception.Message;
+                var body = new Dictionary<string, object>
+                {
+                    ["error"] = context.Exception.Message
+                };
                 context.Result = new BadRequestObjectResult(body);
             }
         }
