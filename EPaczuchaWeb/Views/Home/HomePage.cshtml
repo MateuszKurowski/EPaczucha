@@ -24,11 +24,12 @@
     <p>Aplikacja obsługuje połączenie z bazą danych SQL. Jest ona samowystarczalna i włączenie aplikacji stworzy wszystkie potrzebne obiekty.</p>
     <p>Baza danych została użyta z IdentityDbContext jednak ostatecznie zrezygnowałem z rozwiązania gotowych tabel EF. W warstwie bazy zostały wdrożone migracje.</p>
     <hr />
-    <p>Dostępnych jest 3 użytkowników:.</p>
-        <p>Administartor - Posiada on wszystkie widoki i prawa<br />Login: admin@admin.pl <br />Hasło: 123456</p><br />
+    <p>Dostępnych jest 4 użytkowników:.</p>
+        <p>1. Administartor - Posiada on wszystkie widoki i prawa<br />Login: admin@admin.pl <br />Hasło: 123456</p><br />
         
         <p>2. Moderator - Posiada on wgląd w wszystkich użytkowników jednak nie może dodawać, usuwać ani edytować użytkowników aplikacji<br />Login: mod@mod.pl <br />Hasło: 654321</p><br />
-        <p>Klient - Zwykły przykład klienta z swoimi paczkami<br />Login: klient@gmail.com <br />Hasło: 111222</p><br />
+        <p>3. Klient - Zwykły przykład klienta z swoimi paczkami<br />Login: klient@gmail.com <br />Hasło: 111222</p><br />
+        <p>3. Klient - Zwykły przykład klienta z swoimi paczkami<br />Login: klient2@gmail.com <br />Hasło: 111222</p><br />
     
     <a asp-controller="Home" asp-action="LoginManager" >Przejdź dalej</a>
     @if (User.IsInRole("admin"))
