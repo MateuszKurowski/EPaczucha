@@ -52,6 +52,7 @@ namespace EPaczuchaWeb.Controllers
                 Response.StatusCode = 204;
                 return NotFound();
             }
+            Response.StatusCode = 200;
             return View(_mapperViewModel.Map(dto ?? new CustomerDto()));
         }
 
