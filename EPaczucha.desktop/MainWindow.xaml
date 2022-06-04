@@ -1,0 +1,107 @@
+﻿<Window x:Class="EPaczucha.desktop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EPaczucha.desktop"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="900" Width="1600"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="White">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Background="#ffbc00">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="335"/>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="660"/>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock
+                       Grid.Column="1"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontFamily="Fonts/#Dosis"
+                       FontSize="19"
+                       FontWeight="Medium">
+                <Hyperlink NavigateUri="#" TextDecorations="None" Foreground="Black">EPaczucha</Hyperlink>
+            </TextBlock>
+            <TextBlock
+                       Grid.Column="3"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontFamily="Fonts/#Dosis"
+                       FontSize="19"
+                       FontWeight="Medium">
+                <Hyperlink NavigateUri="#" TextDecorations="None" Foreground="Black">Zaloguj</Hyperlink>
+            </TextBlock>
+            <TextBlock
+                       Grid.Column="4"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontFamily="Fonts/#Dosis"
+                       FontSize="19"
+                       FontWeight="Medium">
+                <Hyperlink NavigateUri="#" TextDecorations="None" Foreground="Black">Zarejestruj</Hyperlink>
+            </TextBlock>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="960"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Column="1" Background="#fff3a8" Margin="12" FontSize="20"> 
+                <StackPanel >
+                    <TextBlock Text="Witaj!" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36"></TextBlock>
+                    <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 10 10 0">Aplikacja EPaczucha to projekt zaliczeniowy laboratoriów przedmiotu „Programowanie obiektowe”.</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 5 10 0">Aplikacja wykonana została w platformie .NET 5 w środowisku Visual Studio 2022.</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 5 10 0">Zajmuje się ona monitorowaniem oraz nadawaniem paczek/listów.</TextBlock>
+                    <Separator/>
+                    <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="0 10 0 -5">Spełnione warunki oceniania:</TextBlock>
+                    <StackPanel Margin="10" Background="White">
+                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 0 10 0">Dane zostały utrwalone za pomocą EF (v5.0.13) przez 6 encji, z czego każda encja posiada relacje,</TextBlock>
+                        <Separator/>
+                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 0 10 0">Użyto serwer bazodanowych MS SQL Server jako LocalDB w ViusalStudi (SQL Server Express),</TextBlock>
+                        <Separator/>
+                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 0 10 0">Interfejs użytkownika w WPF,</TextBlock>
+                        <Separator/>
+                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 0 10 0">Aplikacja zawiera formularze z walidacją,</TextBlock>
+                        <Separator/>
+                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 0 10 0">Projekt indywidualny udostępniony na GitHub,</TextBlock>
+                        <!--<Separator/>
+                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 0 10 0">Dokumentacja XML</TextBlock>-->
+                        <Separator/>
+                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 0 10 0">Wykorzystano DI, każdy Repository posiada swój interfejs po którym dziedziczy i który jest wstrzykiwany przy pomocy DI. Dodatkowo każdy interfejs Repository dziedziczy po specjalnym interfejsie CRUD zawierającym podstawowe funkcje CRUD, oraz po klasie repository bazowym. Na potrzeby warunków oceniania repozytoria te zostały wstrzynknięte. Jednak wiem, że jest to nie zalecane by były tak blisko użytkownika, w tym celu stworzyłem ManageraDto,</TextBlock>
+                        <!--<Separator/>
+                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 0 10 0">W aplikacji została wprowadzona podstawowa autoryzacja z podziałem na role, użytkownik niezalogowany ma dostęp tylko do tej strony, klient do swoich paczek a administrator do listy klientów i ich paczek. Dodatkowo na potrzeby uproszczenia sprawdzenia funkcjonalności zdjąłem wszystkie domyślne wymagania Microsoftu odnośnie haseł (minimalna ilość znaków hasła to 6),</TextBlock>
+                        <Separator/>
+                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 0 10 0">W aplikacji zawarto 29 testów jednostkowych. Sprawdzone zostały w kontrolerach oraz cała logika wykorzystana w aplikacji zawarta w ManagerzeDto,</TextBlock>
+                        <Separator/>
+                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 0 10 0">Instalator aplikacji,</TextBlock>-->
+                    </StackPanel>
+                    <Separator/>
+                    <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 5 10 0">Do projektu testowego zostały dodane dwa Nuggety: "Moq"" - to symulacji interfejsów i managera oraz "Fluent Assertions"" w celu uproszczenia widoku oraz tworzenia testów jednostkowych.</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 5 10 0"></TextBlock>
+                    <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 5 10 0"></TextBlock>
+                    <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 5 10 0"></TextBlock>
+                    <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 5 10 0"></TextBlock>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+        
+    </Grid>
+</Window>
