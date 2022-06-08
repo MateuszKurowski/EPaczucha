@@ -24,5 +24,27 @@ namespace EPaczucha.desktop
         {
             InitializeComponent();
         }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void Grid_DragOver(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+        }
+
+        private void Premium_Dialog(object sender, RoutedEventArgs e)
+        {
+            string messageBoxText = "Funkcja dostępna tylko dla użytkowników premium.";
+            string caption = "Premium only";
+            MessageBoxButton button = MessageBoxButton.OK;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            MessageBoxResult result;
+
+            result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.OK);
+        }
     }
 }
