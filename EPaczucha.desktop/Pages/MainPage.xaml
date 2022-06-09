@@ -1,0 +1,77 @@
+﻿<Page x:Class="EPaczucha.desktop.Pages.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EPaczucha.desktop.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="825" d:DesignWidth="1600"
+      Title="MainPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="280"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="280"/>
+        </Grid.ColumnDefinitions>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Column="1" Background="#fff3a8" Margin="12,12,12,12" FontSize="20">
+            <StackPanel >
+                <TextBlock Text="Witaj!" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36"></TextBlock>
+                <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 10 10 0">Aplikacja EPaczucha to projekt zaliczeniowy laboratoriów przedmiotu „Programowanie obiektowe”.</TextBlock>
+                <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 5 10 0">Aplikacja wykonana została w platformie .NET 5 w środowisku Visual Studio 2022.</TextBlock>
+                <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 5 10 0">Zajmuje się ona monitorowaniem oraz nadawaniem paczek/listów.</TextBlock>
+                <Separator/>
+                <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="0 10 0 -5">Spełnione warunki oceniania:</TextBlock>
+                <StackPanel Margin="10" Background="White">
+                    <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 0 10 0">Dane zostały utrwalone za pomocą EF (v5.0.13) przez 6 encji, z czego każda encja posiada relacje,</TextBlock>
+                    <Separator/>
+                    <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 0 10 0">Użyto serwer bazodanowych MS SQL Server jako LocalDB w ViusalStudi (SQL Server Express),</TextBlock>
+                    <Separator/>
+                    <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 0 10 0">Interfejs użytkownika w WPF,</TextBlock>
+                    <Separator/>
+                    <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 0 10 0">Aplikacja zawiera formularze z walidacją,</TextBlock>
+                    <Separator/>
+                    <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 0 10 0">Projekt indywidualny udostępniony na GitHub,</TextBlock>
+                    <Separator/>
+                    <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 0 10 0">W aplikacji zawarto 29 testów jednostkowych. Sprawdzone zostały w kontrolerach oraz cała logika wykorzystana w aplikacji zawarta w ManagerzeDto,</TextBlock>
+                    <!--<Separator/>
+                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 0 10 0">Dokumentacja XML</TextBlock>-->
+                    <!--<Separator/>
+                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 0 10 0">Wykorzystano DI, każdy Repository posiada swój interfejs po którym dziedziczy i który jest wstrzykiwany przy pomocy DI. Dodatkowo każdy interfejs Repository dziedziczy po specjalnym interfejsie CRUD zawierającym podstawowe funkcje CRUD, oraz po klasie repository bazowym. Na potrzeby warunków oceniania repozytoria te zostały wstrzynknięte. Jednak wiem, że jest to nie zalecane by były tak blisko użytkownika, w tym celu stworzyłem ManageraDto,</TextBlock>-->
+                    <!--<Separator/>
+                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 0 10 0">W aplikacji została wprowadzona podstawowa autoryzacja z podziałem na role, użytkownik niezalogowany ma dostęp tylko do tej strony, klient do swoich paczek a administrator do listy klientów i ich paczek. Dodatkowo na potrzeby uproszczenia sprawdzenia funkcjonalności zdjąłem wszystkie domyślne wymagania Microsoftu odnośnie haseł (minimalna ilość znaków hasła to 6),</TextBlock>
+                        <Separator/>
+                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 0 10 0">W aplikacji zawarto 29 testów jednostkowych. Sprawdzone zostały w kontrolerach oraz cała logika wykorzystana w aplikacji zawarta w ManagerzeDto,</TextBlock>
+                        <Separator/>
+                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 0 10 0">Instalator aplikacji,</TextBlock>-->
+                </StackPanel>
+                <Separator/>
+                <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 5 10 0">Do projektu testowego zostały dodane dwa Nuggety: "Moq"" - to symulacji interfejsów i managera oraz "Fluent Assertions"" w celu uproszczenia widoku oraz tworzenia testów jednostkowych.</TextBlock>
+                <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 5 10 0">Użyty został Nugget AutoMapper w celu automatyzacji mapowania danych pomiędzy obiektami ViewModel/DataTransferObject/Entities.</TextBlock>
+                <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 5 10 0">W celach bezpieczeństwa aplikacja została podzielona na trzy warstwy: Aplikacji, Dto oraz Database.</TextBlock>
+                <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 5 10 0">Baza danych została użyta z IdentityDbContext jednak ostatecznie zrezygnowałem z rozwiązania gotowych tabel EF. W warstwie bazy zostały wdrożone migracje.</TextBlock>
+                <Separator/>
+                <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 5 10 0">Dostępnych jest 4 użytkowników:.</TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 5 10 0">1. Administartor - Posiada on wszystkie widoki i prawa</TextBlock>
+                <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 5 10 0">Login: <TextBox IsReadOnly="True">admin@admin.pl</TextBox></TextBlock>
+                <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 5 10 0">Hasło: <TextBox IsReadOnly="True">123456</TextBox></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 5 10 0">2. Moderator - Posiada on wgląd w wszystkich użytkowników jednak nie może dodawać, usuwać ani edytować użytkowników aplikacji</TextBlock>
+                <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 5 10 0">Login: <TextBox IsReadOnly="True">mod@mod.pl</TextBox></TextBlock>
+                <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 5 10 0">Hasło: <TextBox IsReadOnly="True">654321</TextBox></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 5 10 0">3. Klient - Zwykły przykład klienta z swoimi paczkami</TextBlock>
+                <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 5 10 0">Login: <TextBox IsReadOnly="True">klient@gmail.com</TextBox></TextBlock>
+                <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 5 10 0">Hasło: <TextBox IsReadOnly="True">111222</TextBox></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 5 10 0">4. Klient - Zwykły przykład klienta z swoimi paczkami</TextBlock>
+                <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 5 10 0">Login:
+                        <TextBox IsReadOnly="True">klient2@gmail.com</TextBox></TextBlock>
+                <TextBlock HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 5 10 20">Hasło:
+                        <TextBox IsReadOnly="True">111222</TextBox></TextBlock>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

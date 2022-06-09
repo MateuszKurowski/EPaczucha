@@ -23,6 +23,7 @@ namespace EPaczucha.desktop
         public MainWindow()
         {
             InitializeComponent();
+            FramePages.Content = new Pages.MainPage();
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
@@ -45,6 +46,21 @@ namespace EPaczucha.desktop
             MessageBoxResult result;
 
             result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.OK);
+        }
+
+        public void MainPage_Click(object sender, RoutedEventArgs e)
+        {
+            FramePages.Content = new Pages.MainPage();
+        }
+
+        private void ListaPage_Click(object sender, RoutedEventArgs e)
+        {
+            FramePages.Content = new Pages.ListPage();
+        }
+
+        private void DodajPage_Click(object sender, RoutedEventArgs e)
+        {
+            FramePages.Content = new Pages.DodajPage();
         }
     }
 }
