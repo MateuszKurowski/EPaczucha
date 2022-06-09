@@ -18,14 +18,15 @@
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Column="1" Background="#fff3a8" Margin="12,12,12,12" Width="Auto">
             <StackPanel Width="Auto">
                 <TextBlock FontSize="42" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" Margin="5 0 0 0">Lista Paczek</TextBlock>
-                <Button FontSize="15" BorderThickness="0" Background="Transparent" Width="150" Foreground="#0366d6" Margin="5 0 0 10" HorizontalAlignment="Left" Click="Button_Click">Nadaj nową paczkę</Button>
+                <Button FontSize="15" Foreground="Gray" Click="Premium_Dialog" Background="LightGray" BorderThickness="0" Width="150" Margin="5 0 0 10" HorizontalAlignment="Left">Nadaj nową paczkę</Button>
                 <Separator/>
+
                 <Grid Margin="10">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="385"/>
+                        <ColumnDefinition Width="180"/>
+                        <ColumnDefinition Width="280"/>
+                        <ColumnDefinition Width="150"/>
                     </Grid.ColumnDefinitions>
 
                     <Grid.RowDefinitions>
@@ -43,8 +44,30 @@
                         <TextBlock HorizontalAlignment="Center" Text="Przewidywana data dostarczenia" FontWeight="Bold" FontSize="14"/>
                     </Border>
                     <Border Grid.Row="0" Grid.Column="3" BorderBrush="Black" BorderThickness=" 0 0 0 2" Margin=" 0 0 0 10" Padding="0 0 0 5">
-
+                        <TextBlock HorizontalAlignment="Center" Text="Cena" FontWeight="Bold" FontSize="14"/>
                     </Border>
+
+                    <ListBox Name="lvDataBinding" Grid.Row="1" Grid.ColumnSpan="4" Background="Transparent">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="370"/>
+                                        <ColumnDefinition Width="180"/>
+                                        <ColumnDefinition Width="280"/>
+                                        <ColumnDefinition Width="150"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Grid.Column="0" FontSize="14" VerticalAlignment="Center" Width="385" HorizontalAlignment="Center" Text="{Binding SimpleName}" TextAlignment="Center"/>
+                                    <TextBlock Grid.Column="1" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" Width="180" Text="{Binding StartDate}" TextAlignment="Center"/>
+                                    <TextBlock Grid.Column="2" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" Width="280" Text="{Binding EndDate}" TextAlignment="Center"/>
+                                    <TextBlock Grid.Column="3" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Text="{Binding PackagePrice, StringFormat='\{0\} zł'}" TextAlignment="Center"/>
+
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
                 </Grid>
 
 

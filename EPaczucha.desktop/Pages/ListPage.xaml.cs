@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EPaczucha.desktop.Models;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,19 @@ namespace EPaczucha.desktop.Pages
         public ListPage()
         {
             InitializeComponent();
+            Packages.InitList();
+            lvDataBinding.ItemsSource = Packages.PackageList;
+        }
+
+        private void Premium_Dialog(object sender, RoutedEventArgs e)
+        {
+            string messageBoxText = "Funkcja dostępna tylko dla użytkowników premium.";
+            string caption = "Premium only";
+            MessageBoxButton button = MessageBoxButton.OK;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            MessageBoxResult result;
+
+            result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.OK);
         }
     }
 }

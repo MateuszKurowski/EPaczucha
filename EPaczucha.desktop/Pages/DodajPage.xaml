@@ -34,21 +34,21 @@
                 <Grid Grid.Row="0" Grid.Column="0" Margin="15 15 10 0">
                     <StackPanel>
                         <TextBlock HorizontalAlignment="Center" Text="Przyjazna nazwa paczki:" Margin="0 0 0 5"/>
-                        <TextBox Width="150" Margin="0 0 0 20"/>
+                        <TextBox x:Name="NazwaPaczki" Width="150" Margin="0 0 0 20"/>
 
                         <TextBlock HorizontalAlignment="Center" Text="Data nadania:" Margin="0 0 0 5"/>
-                        <DatePicker DisplayDateEnd="{x:Static sys:DateTime.Today}" SelectedDate="{x:Static sys:DateTime.Now}" Width="150" Margin="0 0 0 20"/>
+                        <DatePicker x:Name="DataNadania" DisplayDateEnd="{x:Static sys:DateTime.Today}" SelectedDate="{x:Static sys:DateTime.Now}" Width="150" Margin="0 0 0 20"/>
                         
 
                         <TextBlock HorizontalAlignment="Center" Text="Typ paczki:" Margin="0 0 0 5"/>
-                        <ComboBox Margin="0 0 0 20">
+                        <ComboBox x:Name="TypPaczki" Margin="0 0 0 20">
                             <ComboBoxItem IsSelected="True" Name="A" Content="Typ A"></ComboBoxItem>
                             <ComboBoxItem Name="B" Content="Typ B"></ComboBoxItem>
                             <ComboBoxItem Name="C" Content="Typ C" ></ComboBoxItem>
                         </ComboBox>
 
                         <TextBlock HorizontalAlignment="Center" Text="Sposób wysłania paczki:" Margin="0 0 0 5"/>
-                        <ComboBox Margin="0 0 0 20">
+                        <ComboBox x:Name="SposobWyslania" Margin="0 0 0 20">
                             <ComboBoxItem Name="Ekonomiczna" Content="Ekonomiczna"></ComboBoxItem>
                             <ComboBoxItem Name="Priorytetowa" Content="Priorytetowa"></ComboBoxItem>
                             <ComboBoxItem IsSelected="True" Name="Kurier" Content="Kurier" ></ComboBoxItem>
@@ -57,21 +57,21 @@
                         <TextBlock Text="Adres dostawy:" FontSize="16" Margin="0 30 0 15"/>
                         
                         <TextBlock HorizontalAlignment="Center" Text="Miasto:" Margin="0 0 0 5"/>
-                        <TextBox Width="150" Margin="0 0 0 20"/>
+                        <TextBox x:Name="Miasto" Width="150" Margin="0 0 0 20"/>
 
                         <TextBlock HorizontalAlignment="Center" Text="Ulica:" Margin="0 0 0 5"/>
-                        <TextBox Width="150" Margin="0 0 0 20"/>
+                        <TextBox x:Name="Ulica" Width="150" Margin="0 0 0 20"/>
 
                         <TextBlock HorizontalAlignment="Center" Text="Numer budynku:" Margin="0 0 0 5"/>
-                        <TextBox Width="150" Margin="0 0 0 20"/>
+                        <TextBox x:Name="NumberBudynku" Width="150" Margin="0 0 0 20"/>
 
                         <TextBlock HorizontalAlignment="Center" Text="Number mieszkania:" Margin="0 0 0 5"/>
-                        <TextBox Width="150" Margin="0 0 0 20"/>
+                        <TextBox x:Name="NumberMieszkania" Width="150" Margin="0 0 0 20"/>
 
                         <TextBlock HorizontalAlignment="Center" Text="Kod pocztowy:" Margin="0 0 0 5"/>
-                        <TextBox Width="150" Margin="0 0 0 20"/>
+                        <TextBox x:Name="KodPocztowy" Width="150" Margin="0 0 0 20"/>
 
-                        <Button Margin="0 0 0 20" Width="50" Background="DodgerBlue" Foreground="White">Utwórz</Button>
+                        <Button Margin="0 0 0 20" Width="50" Background="DodgerBlue" Foreground="White" Click="Button_Click">Utwórz</Button>
                     </StackPanel>
                 </Grid>
 

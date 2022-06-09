@@ -13,7 +13,7 @@ namespace EPaczuchaWeb.Models
         [MaxLength(30, ErrorMessage = "Proszę podać krótsza nazwę paczki!")]
         public string SimpleName { get; set; }
         [DisplayName("Data nadania")]
-        [CustomValidation(typeof(DateTimeBeforeTodayValidator), "ValidateEndTimeRange")]
+        //[CustomValidation(typeof(DateTimeBeforeTodayValidator), "ValidateEndTimeRange")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
         [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
