@@ -46,5 +46,25 @@ namespace EPaczucha.desktop.Pages
 
             result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.OK);
         }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var index = lvDataBinding.SelectedIndex;
+
+            if (index > -1)
+            {
+                Packages.RemoveAt(index);
+                using (EPaczuchaDatabaseContext dbContext = new EPaczuchaDatabaseContext())
+                {
+                    dbContext.Remove(Packages[index - 1]);
+                    dbContext.SaveChanges();
+                }
+            }
+        }
     }
 }

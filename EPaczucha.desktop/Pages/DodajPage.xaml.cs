@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -83,7 +84,10 @@ namespace EPaczucha.desktop.Pages
 
             using (EPaczuchaDatabaseContext dbContext = new EPaczuchaDatabaseContext())
             {
+                var index = dbContext.Packages.ToList().Count;
+                packageDto.Id = index;
                 dbContext.Packages.Add(packageDto);
+                dbContext.SaveChanges();
             }
         }
     }

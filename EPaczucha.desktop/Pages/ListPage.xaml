@@ -32,41 +32,33 @@
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness=" 0 0 0 2" Margin=" 0 0 0 10" Padding="0 0 0 5">
-                        <TextBlock HorizontalAlignment="Center" Text="Twoja nazwa paczki" FontWeight="Bold" FontSize="14"/>
-                    </Border>
-                    <Border Grid.Row="0" Grid.Column="1" BorderBrush="Black" BorderThickness=" 0 0 0 2" Margin=" 0 0 0 10" Padding="0 0 0 5">
-                        <TextBlock HorizontalAlignment="Center" Text="Data nadania" FontWeight="Bold" FontSize="14"/>
-                    </Border>
-                    <Border Grid.Row="0" Grid.Column="2" BorderBrush="Black" BorderThickness=" 0 0 0 2" Margin=" 0 0 0 10" Padding="0 0 0 5">
-                        <TextBlock HorizontalAlignment="Center" Text="Przewidywana data dostarczenia" FontWeight="Bold" FontSize="14"/>
-                    </Border>
-                    <Border Grid.Row="0" Grid.Column="3" BorderBrush="Black" BorderThickness=" 0 0 0 2" Margin=" 0 0 0 10" Padding="0 0 0 5">
-                        <TextBlock HorizontalAlignment="Center" Text="Cena" FontWeight="Bold" FontSize="14"/>
-                    </Border>
-
-                    <ListBox Name="lvDataBinding" Grid.Row="1" Grid.ColumnSpan="4" Background="Transparent">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="370"/>
-                                        <ColumnDefinition Width="180"/>
-                                        <ColumnDefinition Width="280"/>
-                                        <ColumnDefinition Width="150"/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <TextBlock Grid.Column="0" FontSize="14" VerticalAlignment="Center" Width="385" HorizontalAlignment="Center" Text="{Binding SimpleName}" TextAlignment="Center"/>
-                                    <TextBlock Grid.Column="1" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" Width="180" Text="{Binding StartDate}" TextAlignment="Center"/>
-                                    <TextBlock Grid.Column="2" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" Width="280" Text="{Binding EndDate}" TextAlignment="Center"/>
-                                    <TextBlock Grid.Column="3" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Text="{Binding PackagePrice, StringFormat='\{0\} zł'}" TextAlignment="Center"/>
-
-                                </Grid>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+                    <ListView SelectionMode="Extended" SelectionChanged="ListView_SelectionChanged" Name="lvDataBinding" Grid.Row="1" Grid.ColumnSpan="4" Background="Transparent" FontSize="14">
+                        <ListView.View>
+                            <GridView>
+                                <GridView.ColumnHeaderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding}" FontWeight="Bold" />
+                                    </DataTemplate>
+                                </GridView.ColumnHeaderTemplate>
+                                <GridView.ColumnHeaderContainerStyle>
+                                    <Style TargetType="GridViewColumnHeader">
+                                        <Setter Property="FontSize" Value="18" />
+                                        <Setter Property="Padding" Value="5" />
+                                    </Style>
+                                </GridView.ColumnHeaderContainerStyle>
+                                
+                                <GridViewColumn Header="Nazwa" Width="395" DisplayMemberBinding="{Binding Path=Name}" />
+                                <GridViewColumn Header="Data nadania" Width="190" DisplayMemberBinding="{Binding Path=StartDate}" />
+                                <GridViewColumn Header="Przewidywana data dostawy" Width="250" DisplayMemberBinding="{Binding Path=EndDate}" />
+                                <GridViewColumn Header="Cena" Width="150" DisplayMemberBinding="{Binding Path=Price, StringFormat='\{0\} zł'}" />
+                            </GridView>
+                        </ListView.View>
+                        
+                    </ListView>
+                    <Button Grid.Row="3" Width="900" Grid.ColumnSpan="4" Height="30" Click="Button_Click_1">Usuń element</Button>
 
                 </Grid>
 
