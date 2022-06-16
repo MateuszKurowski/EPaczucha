@@ -22,11 +22,18 @@ namespace EPaczucha.desktop.Pages
     /// </summary>
     public partial class ListPage : Page
     {
+        public List<Package> Packages { get; set; }
+
         public ListPage()
         {
             InitializeComponent();
-            Packages.InitList();
-            lvDataBinding.ItemsSource = Packages.PackageList;
+
+            using (EPaczuchaDatabaseContext dbContext = new EPaczuchaDatabaseContext())
+            {
+                Packages = dbContext.Packages.ToList();
+            }
+
+            lvDataBinding.ItemsSource = Packages;
         }
 
         private void Premium_Dialog(object sender, RoutedEventArgs e)

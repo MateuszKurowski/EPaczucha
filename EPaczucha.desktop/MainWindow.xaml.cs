@@ -27,7 +27,6 @@ namespace EPaczucha.desktop
         {
             InitializeComponent();
             FramePages.Content = new Pages.MainPage();
-            Packages.PackageList = new List<PackageViewModel>();
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
@@ -65,40 +64,6 @@ namespace EPaczucha.desktop
         private void DodajPage_Click(object sender, RoutedEventArgs e)
         {
             FramePages.Content = new Pages.DodajPage();
-        }
-    }
-
-    public static class Packages
-    {
-        public static List<PackageViewModel> PackageList { get; set; }
-
-        public static void InitList()
-        {
-            PackageList.Add(new PackageViewModel()
-            {
-                DestinationApartmentNumber = "13",
-                DestinationBuildingNumber = "12",
-                DestinationCity = "Kraków",
-                DestinationStreet = "Rynek",
-                DestinationZipCode = "11-123",
-                EndDate = "2022-06-16",
-                PackagePrice = 13,
-                SimpleName = "Zestaw urodzinowy",
-                StartDate = "2022-06-09",
-            });
-
-            PackageList.Add(new PackageViewModel()
-            {
-                DestinationApartmentNumber = "11",
-                DestinationBuildingNumber = "6",
-                DestinationCity = "Warszawa",
-                DestinationStreet = "Uczelniana",
-                DestinationZipCode = "67-487",
-                EndDate = "2022-06-11",
-                PackagePrice = 32,
-                SimpleName = "Pragmatyczny programista",
-                StartDate = "2022-06-09",
-            });
         }
     }
 }
